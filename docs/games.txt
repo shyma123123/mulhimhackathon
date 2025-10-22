@@ -1,0 +1,86 @@
+**Title:** [Job] Build 3 phishing-awareness mini-games (Web/mobile-friendly) — prototype + bilingual content
+
+**Short summary (one sentence):**
+Build three **separate** educational mini-games (not levels) to teach phishing awareness for the **Omani Cyber Shield** project — web, mobile-friendly, bilingual (Arabic—Omani friendly—and English), safe (mock domains), and deliver a prototype + content + analytics.
+
+---
+
+## Project goal
+Create engaging, realistic, and safe training games that teach users how to spot phishing in email, SMS, voicemail, and fake web pages. The games must be fun, mobile-first, and produce simple analytics so trainers can measure learning gaps.
+
+---
+
+## The three games (must be separate)
+1. **Phish or Safe?** — Show a full email (subject, sender display + raw address, body, links, attachments). Player chooses **PHISH** or **SAFE** within a short timer (configurable difficulty). Immediate feedback explains the cue(s).  
+2. **Spot the Red Flag (Hotspot Inspector)** — Present an email screenshot; player taps/clicks hotspots that indicate phishing (raw sender, link preview, typos, attachments, reply-to mismatch). Wrong clicks give corrective feedback.  
+3. **Phishroom — Escape Room Mystery** — Short narrative puzzle (inbox + phone + fake portal + attachments). Player must safely investigate (view headers, preview links, verify callers) and combine clues to “escape.” Simulate consequences for unsafe choices (teachable replay).
+
+---
+
+## Core requirements & constraints
+- **Platform:** Web app (React preferred). Must be responsive and mobile-first. Propose React Native only if you include a cross-platform plan.  
+- **Bilingual:** English + Arabic (Omani dialect friendly) for UI and all micro-feedback. Keep text short and clear.  
+- **Safety:** Use mock domains and sanitized files only. **No** real phishing infrastructure or malicious payloads.  
+- **Accessibility:** Basic support — audio narration for emails and captions for voicemails.  
+- **Data & analytics:** Simple tracking per player: score, time, missed cues, scenario id. Provide an admin/export (CSV) option.  
+- **Deliverables must be runnable** (hosted link, or zipped build + instructions).
+
+---
+
+## Deliverables (MVP)
+For acceptance the submission must include:
+1. Clickable prototype / functional builds for each game (hosted link or packaged build).  
+2. **Content:** 10 scenarios per game (30 total) in both English and Arabic. Each scenario must include: text/assets, correct answer, detailed micro-feedback (1–2 sentences), and annotated hotspots for Game 2.  
+3. Basic analytics dashboard or CSV export showing per-player results and most-missed cues.  
+4. Short technical docs: how to run locally, stack used, where content is stored, and how to add scenarios.  
+5. Accessibility features implemented (audio + captions).  
+6. Lightweight demo video (2–4 minutes) showing gameplay of all three games.  
+7. Source code repository access (or packaged deliverable) and license terms.
+
+---
+
+## Acceptance criteria (how I will evaluate)
+- All three games work independently, are mobile responsive, and run without external phishing services.  
+- Bilingual UI + micro-feedback present and accurate for every scenario.  
+- Scenarios are realistic and localized (Oman examples where appropriate).  
+- Analytics exports correctly report scores, times, and missed cues.  
+- Code is documented and deliverable runs with the supplied instructions.  
+- No real malware or unsafe content used.
+
+---
+
+## Bonus (nice to have)
+- Lightweight backend (Node/Express or Firebase) for user/session tracking.  
+- Admin UI to add/edit scenarios and view analytics.  
+- Optional React Native build for Android/iOS.  
+- Certificate generation for completed training.
+
+---
+
+## Application instructions — what to send
+When you reply, include:
+1. Short cover (1–2 paragraphs): why you’re right for this.  
+2. Role(s) & team composition (dev, UI/UX, QA) and which parts you will deliver.  
+3. Portfolio links or examples of similar educational/gamified projects.  
+4. A **sample scenario** for *one* game (English + Arabic) demonstrating your understanding — include text, correct answer, and 1–2 sentence micro-feedback.  
+5. Proposed tech stack and hosting approach (static + serverless preferred).  
+6. Estimated cost (fixed price OR hourly + estimate of hours) and earliest timeline to MVP (weeks).  
+7. Licensing terms (I must be able to own or commercially use the deliverables).  
+8. Contact method and timezone.
+
+---
+
+## Budget & timeline
+- I’m open to fixed-price or hourly. Include a realistic quote and ETA for an MVP (clickable prototype + 10 scenarios per game).  
+- Preferred MVP timeline: **6–8 weeks**, but include your ETA.
+
+---
+
+## Safety & legal note
+- This is a **training** product only. Do not use real malicious payloads or live phishing attacks. All sample domains and files must be nonfunctional mockups.
+
+---
+
+Thanks — post or DM me your proposal. I will shortlist candidates and schedule short calls. Reply with the required items above; I respond fast.
+
+**(Optional add for local posts)**: Bilingual posts accepted — Arabic translations of your sample scenario are welcome.

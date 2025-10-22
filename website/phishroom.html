@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishroom Escape - SmartShield Training</title>
+    <meta name="description" content="Narrative puzzle game combining inbox investigation, phone verification, and portal analysis.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Terminal Header -->
+    <div class="terminal-header">
+        <div class="terminal-buttons">
+            <span class="terminal-btn close"></span>
+            <span class="terminal-btn minimize"></span>
+            <span class="terminal-btn maximize"></span>
+        </div>
+        <div class="terminal-title">
+            <i class="fas fa-terminal"></i>
+            <span>smartshield@cyberdefense:~$</span>
+        </div>
+        <div class="terminal-controls">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Game Header -->
+    <div class="game-page-header">
+        <div class="game-page-nav">
+            <button class="back-btn" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i>
+                <span data-en="Back to Games" data-ar="العودة للألعاب">Back to Games</span>
+            </button>
+            <div class="game-page-title">
+                <i class="fas fa-puzzle-piece"></i>
+                <h1 data-en="Phishroom Escape" data-ar="هروب من غرفة التصيد">Phishroom Escape</h1>
+            </div>
+            <button class="game-btn" onclick="toggleLanguage()" id="languageBtn">
+                <i class="fas fa-language"></i>
+                <span>العربية</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Game Content -->
+    <div class="game-page-content">
+        <div class="game-stats">
+            <div class="stat-item">
+                <span class="stat-label" data-en="Clues" data-ar="الأدلة">Clues</span>
+                <span class="stat-value" id="phishroomClues">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label" data-en="Safe Actions" data-ar="الإجراءات الآمنة">Safe Actions</span>
+                <span class="stat-value" id="phishroomSafe">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label" data-en="Risk Level" data-ar="مستوى الخطر">Risk Level</span>
+                <span class="stat-value" id="phishroomRisk">Low</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label" data-en="Room" data-ar="الغرفة">Room</span>
+                <span class="stat-value" id="phishroomRoom">Office</span>
+            </div>
+        </div>
+
+        <!-- Room Visualization -->
+        <div class="room-container" id="roomContainer">
+            <div class="room-scene" id="roomScene">
+                <!-- Room content will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Action Panel -->
+        <div class="action-panel" id="actionPanel">
+            <!-- Action buttons will be loaded here -->
+        </div>
+
+        <!-- Inventory Panel -->
+        <div class="inventory-panel" id="inventoryPanel">
+            <!-- Collected clues will be shown here -->
+        </div>
+    </div>
+
+    <!-- Game End Modal -->
+    <div id="gameEndModal" class="game-end-modal">
+        <div class="game-end-content">
+            <div class="game-end-header">
+                <i class="fas fa-trophy"></i>
+                <h3 data-en="Escape Complete!" data-ar="اكتمل الهروب!">Escape Complete!</h3>
+            </div>
+            <div class="game-end-message" id="gameEndMessage">
+                <!-- Results will be shown here -->
+            </div>
+            <div class="game-end-actions">
+                <button class="btn btn-primary" onclick="playAgain()">
+                    <i class="fas fa-redo"></i>
+                    <span data-en="Play Again" data-ar="العب مرة أخرى">Play Again</span>
+                </button>
+                <button class="btn btn-secondary" onclick="goBack()">
+                    <i class="fas fa-home"></i>
+                    <span data-en="Back to Games" data-ar="العودة للألعاب">Back to Games</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="phishroom-game.js"></script>
+</body>
+</html>

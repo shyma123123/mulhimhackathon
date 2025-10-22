@@ -1,0 +1,27 @@
+{
+  "name": "smartshield-phishing-detector",
+  "version": "1.0.0",
+  "description": "Production-ready Google Chrome extension + backend + analytics dashboard for phishing detection",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:dashboard\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:dashboard": "cd dashboard && npm run dev",
+    "build": "npm run build:backend && npm run build:dashboard && npm run build:extension",
+    "build:backend": "cd backend && npm run build",
+    "build:dashboard": "cd dashboard && npm run build",
+    "build:extension": "cd extension && npm run build",
+    "test": "npm run test:backend && npm run test:extension",
+    "test:backend": "cd backend && npm test",
+    "test:extension": "cd extension && npm test",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:build": "docker-compose build"
+  },
+  "keywords": ["phishing", "security", "chrome-extension", "ml", "cybersecurity"],
+  "author": "SmartShield Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

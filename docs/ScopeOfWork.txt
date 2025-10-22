@@ -1,0 +1,264 @@
+Task: Build a production-ready Google Chrome extension + backend + analytics dashboard that detects phishing in pages and emails, shows an in-browser warning + floating contextual chatbot, and feeds anonymized analytics to a web dashboard.
+
+High level summary
+
+Chrome extension (Manifest V3) scrapes full page content (DOM & visible email text), runs local heuristics/ML to detect phishing suspicion. If suspicious, show immediate warning popup and floating chatbot button.
+
+Chatbot is preloaded with the exact suspicious message/context so user can simply ask “Why was this flagged?” and get an explanation. Chat responses come from a configurable LLM provider (default: GEMINI-free during development; target: GPT-4 when API available). Switching model providers is a config change in .env.
+
+Backend (Node.js/Express) provides endpoints for model inference proxy, analytics ingestion, user auth, and admin dashboard. DB stores anonymized analytics only (counts, timestamps, institution id), not raw message texts unless explicit consent and proper masking.
+
+Dashboard (React) shows counts: scans, suspicious detections, warnings shown, user confirmations (false positive/true positive), engagement with chatbot, training participation. UI aesthetic: geeky / tech vibe (Roboto + terminal-like components / monospaced panels).
+
+Privacy-first: on-device processing first; only send minimal/sanitized context for model inference when needed. Provide redaction rules and privacy mode.
+
+Deliverables
+
+Chrome extension:
+
+content script (DOM scrape + preprocessing)
+
+background service worker (throttling, local ML, policy)
+
+popup UI for warnings
+
+floating chatbot widget
+
+extension settings UI (enable/disable, privacy mode)
+
+Backend API (Node.js + Express):
+
+/api/scan (POST) — receive sanitized snapshot and return {score, reasons, model_response}
+
+/api/chat (POST) — send message + preloaded context to model bridge
+
+/api/analytics (POST) — receive minimal analytics events
+
+/api/auth (optional) — simple JWT (for enterprise dashboards)
+
+model bridge layer to switch between GEMINI / OPENAI easily
+
+Dashboard (React):
+
+Auth (basic)
+
+Realtime / aggregated analytics (filters by org / date / department)
+
+Charts: daily scans, suspicious detections, false positives rate, chatbot engagement
+
+Export CSV / JSON
+
+Admin settings: API keys, model provider toggle, onboarding text
+
+DevOps / infra:
+
+Dockerized backend + db (Postgres) and frontend
+
+Example deployment with Docker Compose
+
+CI check that lints and runs tests
+
+Docs:
+
+README with run steps
+
+example .env
+
+Privacy & deployment checklist
+
+Tests:
+
+Unit tests for scan logic
+
+Integration tests for /api/scan and /api/chat
+
+End-to-end test for extension flow (content script → backend → popup)
+
+Tech stack (recommended)
+
+Extension: Chrome Manifest V3, TypeScript, content script, service worker, React for extension UI
+
+Backend: Node.js (18+), TypeScript, Express, Axios (for model APIs)
+
+Database: PostgreSQL (analytics + basic user/org table)
+
+Queue (optional): Redis for throttling and async jobs
+
+Dashboard: React + Vite or Next.js, Tailwind CSS (custom theme for terminal look), Roboto + monospace fonts
+
+ML / LLM: Model bridge pattern — MODEL_PROVIDER env var = gemini|openai|local ; fallback to gemini during dev
+
+Deployment: Docker + Docker Compose (or Kubernetes later)
+
+Model switching (design)
+
+Implement a modelBridge module that exports analyzeText(context, text) and chat(context, question).
+
+modelBridge reads MODEL_PROVIDER and calls the correct client:
+
+openai → OpenAI GPT-4 API (when key provided)
+
+gemini → Gemini free model API or wrapper (development)
+
+local → a local lightweight model (optional)
+
+Acceptable providers and model names live in .env. No code change needed — only env switch.
+
+Privacy & safety rules (must implement)
+
+On-device first: content script runs heuristics + regex + lightweight ML. Only send to backend if:
+
+score between LOW_THRESHOLD and HIGH_THRESHOLD (uncertain)
+
+or user requests explanation via chatbot
+
+Sanitization: strip/replace PII (national IDs, credit cards, email addresses) before sending. Provide short hashed representation if needed for correlation.
+
+Consent & Opt-out: Extension must have clear UI to toggle data sharing and show what will be transmitted.
+
+Data retention: Analytics only; raw message storage disabled by default. If stored, mark and delete per policy.
+
+API routes (spec)
+
+POST /api/scan
+body: { snapshot_hash, sanitized_text, metadata: {url, timestamp, domain, orgId?} }
+response: { score:0-1, label: 'suspicious'|'clean', reasons: [..], explain: '...' }
+
+POST /api/chat
+body: { snapshot_hash, sanitized_text, question }
+response: { answer: '...', sources: [...], model: 'gemini' }
+
+POST /api/analytics
+body: { event: 'scan'|'warning_shown'|'user_report', orgId, timestamp, meta }
+response: { ok: true }
+
+POST /api/auth/login (optional)
+
+GET /api/stats?orgId=&from=&to= — dashboard data
+
+Acceptance criteria
+
+Extension detects phishing samples from a test suite (>= 90% detection on labeled dataset of common phish templates; configurable).
+
+Chatbot explains flagging reason in <3s when proxied through backend (or <1s when using cached heuristics).
+
+Dashboard correctly shows total scans, suspicious_count, warnings_shown, user_feedback (true/false) and supports CSV export.
+
+Model provider can be switched via .env and app restarts (no code change).
+
+CI runs tests and build step; Docker images build successfully.
+
+Example .env (example.env)
+
+# Server
+PORT=4000
+NODE_ENV=development
+BASE_URL=http://localhost:4000
+
+# Database
+DATABASE_URL=postgres://postgres:password@db:5432/phish_prod
+
+# Auth
+JWT_SECRET=change_me_to_a_strong_secret
+
+# Model provider & keys
+MODEL_PROVIDER=gemini    # options: gemini | openai | local
+MODEL_NAME=gemini-free  # or gpt-4, text-davinci-003 etc.
+GEMINI_API_KEY=your_gemini_key_here
+OPENAI_API_KEY=your_openai_key_here
+
+# Extension settings (for local dev)
+EXTENSION_BACKEND_URL=http://localhost:4000
+
+# Analytics storage
+RETENTION_DAYS=365
+
+# Security
+SENTRY_DSN=
+CORS_ORIGINS=http://localhost:3000,http://localhost:4000
+
+
+How to run (dev)
+
+Clone repo.
+
+Copy example.env to .env and fill keys.
+
+Start DB (docker-compose): docker compose up -d db
+
+Backend:
+
+cd backend
+
+npm install
+
+npm run migrate (creates analytics table)
+
+npm run dev (starts server on PORT)
+
+Frontend dashboard:
+
+cd dashboard
+
+npm install
+
+npm run dev (default http://localhost:3000
+)
+
+Extension (load unpacked):
+
+cd extension
+
+npm install
+
+npm run build (produces dist/)
+
+In Chrome: Extensions → Load unpacked → select extension/dist
+
+Test flow:
+
+Open sample phishing test pages. Verify extension shows warnings and floating chat.
+
+Use POST /api/analytics to confirm events appear in dashboard.
+
+Minimal test dataset (deliverable)
+
+Provide a small labeled dataset of 50–100 phishing examples (common templates, credential harvesters, invoice scams) and 50 benign emails/pages for local testing.
+
+UX / UI notes
+
+Fonts: Roboto + Roboto Mono; terminal component panels with dark background and green/amber highlights.
+
+Warning color: amber-to-red gradient; call-to-action: “Ask why” floating button.
+
+Dashboard theme: dark tech vibe, monospaced panels for recent logs.
+
+Project milestones (sprints)
+
+Sprint 1 (2w): scaffolding, extension skeleton, backend basic endpoints, modelBridge stub
+
+Sprint 2 (2w): heuristics + local rule engine, basic popup UI, basic dashboard analytics ingestion
+
+Sprint 3 (2w): model integration with GEMINI fallback, /api/chat, chatbot widget
+
+Sprint 4 (2w): polishing UX, privacy sanitization, CI/Docker, tests
+
+Sprint 5 (2w): pilot deployment and documentation
+
+Risks & mitigations (short)
+
+Risk: extension abuse or compromise — Mitigation: frequent security audits, signed releases, minimal permissions
+
+Risk: privacy backlash — Mitigation: on-device processing + clear opt-in + redaction
+
+Risk: model latency/costs — Mitigation: cache frequent responses, use lightweight heuristics to avoid model calls
+
+Final notes for Cursor developer
+
+Keep modelBridge decoupled and thoroughly unit tested.
+
+Provide a config file for thresholds (LOW_THRESHOLD, HIGH_THRESHOLD, REPORT_THRESHOLD).
+
+Add a debug mode for the extension to simulate model responses without real API calls.
+
+Deliver clean README with run commands and a one-page privacy summary for customers.

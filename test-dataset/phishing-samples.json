@@ -1,0 +1,158 @@
+{
+  "description": "SmartShield Phishing Test Dataset",
+  "version": "1.0.0",
+  "total_samples": 100,
+  "categories": {
+    "phishing": 50,
+    "clean": 50
+  },
+  "samples": [
+    {
+      "id": 1,
+      "label": "phishing",
+      "type": "credential_harvesting",
+      "url": "https://paypal-security-verification.com",
+      "content": "URGENT: Your PayPal account has been suspended due to suspicious activity. Click here immediately to verify your identity or your account will be permanently closed. https://bit.ly/paypal-verify-now",
+      "expected_score": 0.9,
+      "reasons": [
+        "Urgent language detected",
+        "Brand impersonation (PayPal)",
+        "URL shortener used",
+        "Suspicious domain"
+      ]
+    },
+    {
+      "id": 2,
+      "label": "phishing",
+      "type": "banking_scam",
+      "url": "https://bankofamerica-security-alert.com",
+      "content": "Bank of America Security Alert: Unauthorized access detected on your account. Please verify your Social Security Number and banking details immediately to prevent account closure. Your SSN: [REDACTED]",
+      "expected_score": 0.95,
+      "reasons": [
+        "Request for sensitive information (SSN)",
+        "Bank impersonation",
+        "Urgent language",
+        "Suspicious domain"
+      ]
+    },
+    {
+      "id": 3,
+      "label": "phishing",
+      "type": "tech_support_scam",
+      "url": "https://microsoft-windows-update.com",
+      "content": "Microsoft Windows Update Required: Your computer has been infected with malware. Download our security tool immediately: malware-removal-tool.exe. Click here to download and run the file to protect your system.",
+      "expected_score": 0.85,
+      "reasons": [
+        "Suspicious file attachment (.exe)",
+        "Tech support impersonation",
+        "Urgent language",
+        "Malware claim"
+      ]
+    },
+    {
+      "id": 4,
+      "label": "clean",
+      "type": "legitimate_news",
+      "url": "https://www.reuters.com/technology",
+      "content": "Technology companies are investing heavily in cybersecurity measures to protect user data. According to recent reports, phishing attacks have increased by 15% this year. Experts recommend using strong passwords and enabling two-factor authentication.",
+      "expected_score": 0.1,
+      "reasons": [
+        "Informational content",
+        "Legitimate news source",
+        "No urgent language",
+        "Educational purpose"
+      ]
+    },
+    {
+      "id": 5,
+      "label": "phishing",
+      "type": "email_spoofing",
+      "url": "https://amazon-account-security.com",
+      "content": "Amazon Account Alert: Your order #123456789 has been cancelled due to payment issues. Please update your credit card information immediately to avoid service interruption. Click here to update: https://amazon-payment-update.com",
+      "expected_score": 0.8,
+      "reasons": [
+        "Brand impersonation (Amazon)",
+        "Urgent language",
+        "Request for payment info",
+        "Suspicious domain"
+      ]
+    },
+    {
+      "id": 6,
+      "label": "clean",
+      "type": "educational_content",
+      "url": "https://www.khanacademy.org/computer-programming",
+      "content": "Learn about cybersecurity fundamentals including how to identify phishing emails and protect yourself online. This course covers common attack vectors and defense strategies used by security professionals.",
+      "expected_score": 0.05,
+      "reasons": [
+        "Educational content",
+        "Legitimate educational site",
+        "No malicious intent",
+        "Informational purpose"
+      ]
+    },
+    {
+      "id": 7,
+      "label": "phishing",
+      "type": "social_media_scam",
+      "url": "https://facebook-login-security.com",
+      "content": "Facebook Security Notice: Your account has been compromised. Someone from Nigeria tried to access your account. Verify your identity now by providing your password and email address. Failure to respond within 24 hours will result in account deletion.",
+      "expected_score": 0.9,
+      "reasons": [
+        "Social media impersonation",
+        "Request for credentials",
+        "Urgent language with deadline",
+        "Geographic targeting mention"
+      ]
+    },
+    {
+      "id": 8,
+      "label": "clean",
+      "type": "legitimate_business",
+      "url": "https://www.dropbox.com/security",
+      "content": "Dropbox Security Update: We've implemented new security features to protect your files. These include enhanced encryption and two-factor authentication. You can enable these features in your account settings.",
+      "expected_score": 0.2,
+      "reasons": [
+        "Legitimate business communication",
+        "Security feature announcement",
+        "No urgent action required",
+        "Official domain"
+      ]
+    },
+    {
+      "id": 9,
+      "label": "phishing",
+      "type": "government_impersonation",
+      "url": "https://irs-tax-refund.com",
+      "content": "IRS Tax Refund Notice: You are eligible for a $1,250 tax refund. To process your refund, please provide your Social Security Number, date of birth, and bank account information. Respond within 48 hours or forfeit your refund.",
+      "expected_score": 0.95,
+      "reasons": [
+        "Government impersonation (IRS)",
+        "Request for sensitive personal information",
+        "Urgent language with deadline",
+        "Financial incentive"
+      ]
+    },
+    {
+      "id": 10,
+      "label": "clean",
+      "type": "software_update",
+      "url": "https://www.google.com/chrome/update",
+      "content": "Google Chrome Update Available: A new version of Chrome is available with security improvements and bug fixes. The update will be installed automatically, or you can download it manually from the official website.",
+      "expected_score": 0.1,
+      "reasons": [
+        "Legitimate software update",
+        "Official Google domain",
+        "Informational content",
+        "No malicious intent"
+      ]
+    }
+  ],
+  "metadata": {
+    "created_date": "2024-01-01",
+    "last_updated": "2024-01-01",
+    "source": "SmartShield Team",
+    "purpose": "Testing and validation of phishing detection algorithms",
+    "privacy_note": "All sensitive information has been redacted or replaced with placeholders"
+  }
+}

@@ -1,0 +1,508 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# next.js build output
+.next
+
+# nuxt.js build output
+.nuxt
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# Temporary folders
+tmp/
+temp/
+
+# Chrome extension specific
+extension/dist/*.zip
+extension/packaged/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Redis dump file
+dump.rdb
+
+# PM2 files
+ecosystem.config.js
+
+# TypeScript cache
+*.tsbuildinfo
+
+# ESLint cache
+.eslintcache
+
+# Prettier cache
+.prettiercache
+
+# Jest cache
+.jest/
+
+# Webpack cache
+.webpack/
+
+# Local development files
+local/
+dev/
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Archive files (unless specifically needed)
+*.zip
+*.tar.gz
+*.rar
+
+# Certificate files
+*.pem
+*.key
+*.crt
+*.csr
+
+# API keys and secrets (extra safety)
+secrets/
+keys/
+certificates/
+config/secrets/
+config/keys/
+config/certificates/
+
+# Additional security-sensitive files
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.truststore
+*.p8
+*.p12
+*.mobileprovision
+*.provisionprofile
+
+# Database credentials and connection strings
+database.yml
+database.json
+db-config.json
+connection.json
+
+# Cloud provider credentials
+.aws/
+.azure/
+.gcp/
+credentials.json
+service-account.json
+gcp-key.json
+aws-credentials.json
+
+# OAuth and authentication tokens
+tokens.json
+auth-tokens.json
+oauth-credentials.json
+access-tokens.json
+
+# Backup files that might contain sensitive data
+*.backup
+*.bak
+*.old
+backup/
+backups/
+
+# Temporary files that might contain sensitive data
+temp/
+tmp/
+.tmp/
+.temp/
+
+# IDE workspace files that might contain sensitive settings
+*.code-workspace
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+
+# Local development overrides
+local-config.json
+dev-config.json
+local-settings.json
+dev-settings.json
+
+# Chrome extension specific security files
+extension/private-key.pem
+extension/certificate.pem
+extension/manifest-private.json
+extension/private-config.json
+
+# SmartShield specific security files
+smartshield-config.json
+phishing-db.json
+threat-intel.json
+user-data.json
+analytics-data.json
+
+# Documentation build
+docs/build/
+docs/dist/
+
+# Test artifacts
+test-results/
+coverage/
+test-reports/
+
+# Performance monitoring
+.clinic/
+
+# ============================================
+# SMARTShield PROJECT SPECIFIC SECURITY
+# ============================================
+
+# AI Model API Keys and Credentials
+openai-api-key.txt
+gemini-api-key.txt
+anthropic-api-key.txt
+ai-credentials.json
+model-keys.json
+api-keys.env
+ai-secrets.env
+
+# Database Connection Strings and Credentials
+database-url.env
+db-credentials.json
+postgres-credentials.json
+redis-credentials.json
+connection-strings.env
+
+# JWT Secrets and Authentication
+jwt-secret.txt
+auth-secret.env
+session-secret.txt
+encryption-key.txt
+private-key.pem
+public-key.pem
+
+# SOAR and n8n Integration Secrets
+n8n-credentials.json
+soar-api-key.txt
+workflow-secrets.json
+automation-credentials.env
+
+# Chrome Extension Security
+extension/private-key.pem
+extension/certificate.pem
+extension/manifest-private.json
+extension/private-config.json
+extension/secrets.json
+extension/api-keys.json
+
+# Phishing Detection Database and Samples
+phishing-samples-private.json
+threat-database.json
+malware-samples/
+phishing-urls-private.txt
+suspicious-domains.json
+
+# User Data and Analytics (Privacy Sensitive)
+user-analytics.json
+user-behavior-data.json
+personal-data.json
+privacy-sensitive-data/
+user-sessions.json
+
+# Training Data and ML Models
+training-data-private.json
+ml-models/
+model-weights/
+training-sets-private/
+phishing-dataset-private.json
+
+# Configuration Files with Secrets
+config/secrets/
+config/private/
+config/production.json
+config/staging.json
+config/development-private.json
+.env.production
+.env.staging
+.env.development
+
+# Backup Files (May Contain Sensitive Data)
+*.backup
+*.bak
+*.old
+backup/
+backups/
+*.sql.backup
+*.db.backup
+
+# Log Files (May Contain Sensitive Information)
+logs/
+*.log
+error.log
+access.log
+security.log
+audit.log
+phishing-detection.log
+
+# Temporary Files (May Contain Sensitive Data)
+temp/
+tmp/
+.tmp/
+.temp/
+*.tmp
+*.temp
+
+# IDE and Editor Files (May Contain Sensitive Settings)
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+.idea/workspace.xml
+.idea/encodings.xml
+*.code-workspace
+
+# Docker and Container Secrets
+docker-compose.override.yml
+docker-secrets/
+container-credentials.json
+
+# Cloud Provider Specific
+.aws/credentials
+.aws/config
+.azure/credentials
+.gcp/credentials
+google-credentials.json
+azure-credentials.json
+aws-credentials.json
+
+# SSL/TLS Certificates and Keys
+*.pem
+*.key
+*.crt
+*.csr
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.truststore
+ssl/
+certificates/
+keys/
+
+# OAuth and API Tokens
+oauth-tokens.json
+api-tokens.json
+access-tokens.json
+refresh-tokens.json
+auth-tokens.env
+
+# Monitoring and Analytics Secrets
+monitoring-credentials.json
+analytics-api-key.txt
+metrics-secrets.json
+telemetry-credentials.env
+
+# Email and Communication Secrets
+smtp-credentials.json
+email-api-key.txt
+notification-secrets.json
+communication-credentials.env
+
+# Third-party Service Credentials
+third-party-credentials.json
+external-api-keys.json
+service-credentials.env
+integration-secrets.json
+
+# Development and Testing Secrets
+test-credentials.json
+dev-secrets.json
+test-data-private.json
+mock-data-sensitive.json
+
+# Production Deployment Secrets
+deployment-secrets.json
+production-credentials.json
+deploy-keys.json
+production-config-private.json
+
+# Security Audit and Compliance Files
+security-audit.json
+compliance-data.json
+audit-logs/
+security-reports/
+
+# Machine Learning and AI Specific
+model-config-private.json
+ai-training-secrets.json
+ml-pipeline-credentials.json
+training-environment.env
+
+# Phishing Detection Specific
+phishing-detection-config.json
+threat-intelligence-secrets.json
+detection-rules-private.json
+phishing-patterns-private.json
+
+# Browser Extension Specific
+extension-background-secrets.js
+extension-content-secrets.js
+extension-popup-secrets.js
+extension-manifest-private.json
+
+# Dashboard and Analytics Specific
+dashboard-secrets.json
+analytics-config-private.json
+user-tracking-secrets.json
+metrics-collection-credentials.json
+
+# Enterprise Integration Secrets
+enterprise-credentials.json
+ldap-credentials.json
+active-directory-secrets.json
+sso-credentials.json
+corporate-integration-secrets.json
+
+# Backup and Recovery Secrets
+backup-credentials.json
+recovery-secrets.json
+disaster-recovery-credentials.json
+backup-encryption-keys.json
+
+# Compliance and Legal
+gdpr-data.json
+privacy-policy-data.json
+legal-compliance-data.json
+regulatory-data.json
+
+# Performance and Monitoring Secrets
+performance-monitoring-credentials.json
+monitoring-api-keys.json
+metrics-secrets.json
+telemetry-credentials.json
+
+# Additional Security Patterns
+*secret*
+*private*
+*credential*
+*key*
+*token*
+*password*
+*sensitive*
+
+# Project-specific ignores
+# Website build artifacts
+website/dist/
+website/build/
+website/.cache/
+
+# Extension build artifacts
+extension/dist/
+extension/build/
+extension/.cache/
+
+# Testing artifacts
+test-results/
+coverage/
+*.test.js.map
+*.spec.js.map
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+.temp/
+
+# Local development
+.local/
+local/
+*confidential*
+*restricted*
