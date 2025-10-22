@@ -144,22 +144,19 @@ class PhishroomGame {
           <h3>${room.name}</h3>
           <p>${room.description[this.currentLanguage]}</p>
         </div>
-        <div class="room-icon">
-          <i class="fas fa-${this.getRoomIcon(room.id)}"></i>
-        </div>
       </div>
     `;
     
-    // Create action buttons
+    // Create action buttons without icons
     actionPanel.innerHTML = room.actions.map(action => `
-      <button class="action-btn ${action.type}" onclick="game.takeAction('${action.id}')">
-        <i class="fas fa-${this.getActionIcon(action.id)}"></i>
+      <button class="action-btn" onclick="game.takeAction('${action.id}')">
         <span>${action.text[this.currentLanguage]}</span>
       </button>
     `).join('');
     
     this.updateInventory();
-    this.updateRoomStats();
+    this.updateStats();
+    this.updateProgress();
   }
 
   getRoomIcon(roomId) {
@@ -195,7 +192,7 @@ class PhishroomGame {
     
     // Record the action taken
     this.actionsTaken.push({
-      room: this.currentRoom + 1,
+      step: this.currentStep + 1,
       roomName: room.name,
       action: action.text[this.currentLanguage],
       type: action.type,
@@ -209,23 +206,33 @@ class PhishroomGame {
         this.clues++;
       }
       this.showActionFeedback(true, action.text[this.currentLanguage]);
+      
+      // Only increment step for correct (safe) actions
+      this.currentStep++;
+      this.updateStats();
+      this.updateInventory();
+      this.updateProgress();
+      
+      // Check if game should end
+      if (this.currentStep >= this.maxSteps) {
+        setTimeout(() => {
+          this.endGame();
+        }, 2000);
+      } else {
+        // Move to next room after delay
+        setTimeout(() => {
+          this.currentRoom = (this.currentRoom + 1) % this.rooms.length;
+          this.loadRoom();
+        }, 2000);
+      }
     } else if (action.type === 'dangerous') {
       this.riskLevel = 'High';
       this.showActionFeedback(false, action.text[this.currentLanguage], action.consequence);
+      
+      // Don't increment step for wrong actions - stay in same room
+      this.updateStats();
+      this.updateInventory();
     }
-    
-    this.updateStats();
-    this.updateInventory();
-    
-    // Move to next room
-    setTimeout(() => {
-      this.currentRoom++;
-      if (this.currentRoom < this.rooms.length) {
-        this.loadRoom();
-      } else {
-        this.endGame();
-      }
-    }, 2000);
   }
 
   showActionFeedback(isCorrect, actionText, consequence = null) {
@@ -342,9 +349,13 @@ class PhishroomGame {
     document.getElementById('phishroomRisk').textContent = this.riskLevel;
   }
 
-  updateRoomStats() {
-    const room = this.rooms[this.currentRoom];
-    document.getElementById('phishroomRoom').textContent = room.name;
+  updateProgress() {
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const percentage = (this.currentStep / this.maxSteps) * 100;
+    
+    progressFill.style.width = `${percentage}%`;
+    progressText.textContent = `Step ${this.currentStep + 1} of ${this.maxSteps}`;
   }
 
   updateInventory() {
@@ -412,4 +423,6 @@ function playAgain() {
 }
 
 function closeGameEndModal() {
-  const modal = document.getElementById('ga
+  const modal = document.getElementById('gameEndModal');
+  modal.classList.remove('show');
+}
