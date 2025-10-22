@@ -707,119 +707,6 @@
         </div>
     </footer>
 
-    <!-- Game Modals -->
-    <div id="gameModal" class="game-modal">
-        <div class="game-modal-content">
-            <div class="game-header">
-                <div class="game-title">
-                    <i class="fas fa-gamepad"></i>
-                    <span id="gameTitle">Game Title</span>
-                </div>
-                <div class="game-controls">
-                    <button class="game-btn" onclick="toggleLanguage()" id="languageBtn">
-                        <i class="fas fa-language"></i>
-                        <span>العربية</span>
-                    </button>
-                    <button class="game-btn" onclick="closeGame()">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="game-body" id="gameBody">
-                <!-- Game content will be loaded here -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Phish or Safe Game -->
-    <div id="phishSafeGame" class="game-content" style="display: none;">
-        <div class="game-stats">
-            <div class="stat-item">
-                <span class="stat-label" data-en="Score" data-ar="النقاط">Score</span>
-                <span class="stat-value" id="phishScore">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label" data-en="Time" data-ar="الوقت">Time</span>
-                <span class="stat-value" id="phishTime">30</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label" data-en="Level" data-ar="المستوى">Level</span>
-                <span class="stat-value" id="phishLevel">1</span>
-            </div>
-        </div>
-        <div class="email-container" id="emailContainer">
-            <!-- Email content will be loaded here -->
-        </div>
-        <div class="game-actions">
-            <button class="game-action-btn phish-btn" onclick="makeChoice('phish')">
-                <i class="fas fa-exclamation-triangle"></i>
-                <span data-en="PHISH" data-ar="تصيد">PHISH</span>
-            </button>
-            <button class="game-action-btn safe-btn" onclick="makeChoice('safe')">
-                <i class="fas fa-shield-alt"></i>
-                <span data-en="SAFE" data-ar="آمن">SAFE</span>
-            </button>
-        </div>
-        <div class="feedback-container" id="feedbackContainer">
-            <!-- Feedback will be shown here -->
-        </div>
-    </div>
-
-    <!-- Spot the Red Flag Game -->
-    <div id="hotspotGame" class="game-content" style="display: none;">
-        <div class="game-stats">
-            <div class="stat-item">
-                <span class="stat-label" data-en="Found" data-ar="تم العثور">Found</span>
-                <span class="stat-value" id="hotspotFound">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label" data-en="Total" data-ar="المجموع">Total</span>
-                <span class="stat-value" id="hotspotTotal">5</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label" data-en="Mistakes" data-ar="الأخطاء">Mistakes</span>
-                <span class="stat-value" id="hotspotMistakes">0</span>
-            </div>
-        </div>
-        <div class="email-screenshot" id="emailScreenshot">
-            <!-- Email screenshot with hotspots will be loaded here -->
-        </div>
-        <div class="hotspot-instructions">
-            <p data-en="Click on suspicious elements in the email" data-ar="انقر على العناصر المشبوهة في البريد الإلكتروني">
-                Click on suspicious elements in the email
-            </p>
-        </div>
-        <div class="feedback-container" id="hotspotFeedback">
-            <!-- Feedback will be shown here -->
-        </div>
-    </div>
-
-    <!-- Phishroom Escape Game -->
-    <div id="phishroomGame" class="game-content" style="display: none;">
-        <div class="game-stats">
-            <div class="stat-item">
-                <span class="stat-label" data-en="Clues" data-ar="الأدلة">Clues</span>
-                <span class="stat-value" id="phishroomClues">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label" data-en="Safe Actions" data-ar="الإجراءات الآمنة">Safe Actions</span>
-                <span class="stat-value" id="phishroomSafe">0</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label" data-en="Risk Level" data-ar="مستوى الخطر">Risk Level</span>
-                <span class="stat-value" id="phishroomRisk">Low</span>
-            </div>
-        </div>
-        <div class="narrative-container" id="narrativeContainer">
-            <!-- Narrative content will be loaded here -->
-        </div>
-        <div class="action-panel" id="actionPanel">
-            <!-- Action buttons will be loaded here -->
-        </div>
-        <div class="inventory-panel" id="inventoryPanel">
-            <!-- Collected clues will be shown here -->
-        </div>
-    </div>
 
     <!-- Floating Back to Top Button -->
     <button id="backToTop" class="back-to-top" onclick="scrollToTop()">
@@ -827,6 +714,5 @@
     </button>
 
     <script src="script.js"></script>
-    <script src="games.js"></script>
 </body>
 </html>
