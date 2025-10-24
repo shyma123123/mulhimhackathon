@@ -8,12 +8,12 @@
  * - Warning display and chatbot integration
  */
 
-import { PhishingDetector } from '@/services/phishingDetector';
-import { ContentExtractor } from '@/services/contentExtractor';
-import { WarningDisplay } from '@/components/warningDisplay';
-import { ChatbotWidget } from '@/components/chatbotWidget';
-import { logger } from '@/utils/logger';
-import { ConfigService } from '@/services/config';
+import { PhishingDetector } from '../services/phishingDetector';
+import { ContentExtractor } from '../services/contentExtractor';
+import { WarningDisplay } from '../components/warningDisplay';
+import { ChatbotWidget } from '../components/chatbotWidget';
+import { logger } from '../utils/logger';
+import { ConfigService } from '../services/config';
 
 class SmartShieldContentScript {
   private isAnalyzing = false;
@@ -132,31 +132,56 @@ class SmartShieldContentScript {
       // Extract content from the page
       const content = await ContentExtractor.extractContent();
       
-      // Run local phishing detection
-      const result = await PhishingDetector.analyzeContent(content);
+      // Run local phishing detection first
+      const detector = new PhishingDetector();
+      const localResult = await detector.analyzeContent(content);
       
-      this.analysisResult = result;
+      // If local analysis is uncertain, send to backend for Gemini analysis
+      let finalResult = localResult;
+      
+      if (localResult.score >= 0.3 && localResult.score <= 0.7) {
+        try {
+          const backendResult = await this.sendToBackendForAnalysis(content);
+          if (backendResult) {
+            finalResult = backendResult;
+          }
+        } catch (error) {
+          logger.warn('Backend analysis failed, using local result', { error });
+        }
+      }
+      
+      this.analysisResult = finalResult;
       
       // Send result to background script
       chrome.runtime.sendMessage({
         type: 'ANALYSIS_RESULT',
-        payload: result
+        payload: {
+          score: finalResult.score,
+          label: finalResult.label,
+          reasons: finalResult.reasons,
+          url: window.location.href,
+          timestamp: Date.now(),
+          model: finalResult.model || 'local',
+          provider: finalResult.provider || 'local'
+        }
       });
 
       // Show warning if high risk
-      if (result.score >= this.config.highThreshold) {
-        await this.showWarning(result);
+      if (finalResult.score >= this.config.highThreshold) {
+        await this.showWarning(finalResult);
       }
 
       // Show chatbot widget if suspicious
-      if (result.score >= this.config.lowThreshold) {
-        await this.showChatbotWidget(result);
+      if (finalResult.score >= this.config.lowThreshold) {
+        await this.showChatbotWidget(finalResult);
       }
 
       logger.info('Content analysis completed', {
-        score: result.score,
-        label: result.label,
-        reasons: result.reasons.length
+        score: finalResult.score,
+        label: finalResult.label,
+        reasons: finalResult.reasons.length,
+        model: finalResult.model || 'local',
+        provider: finalResult.provider || 'local'
       });
 
     } catch (error) {
@@ -172,12 +197,15 @@ class SmartShieldContentScript {
   private async showWarning(result: any): Promise<void> {
     try {
       if (this.warningDisplay) {
-        this.warningDisplay.update(result);
-        return;
+        this.warningDisplay.hide();
       }
 
-      this.warningDisplay = new WarningDisplay(result);
-      await this.warningDisplay.show();
+      this.warningDisplay = new WarningDisplay();
+      this.warningDisplay.show(
+        result.score >= 0.8 ? 'high' : result.score >= 0.5 ? 'medium' : 'low',
+        result.reasons || ['Suspicious content detected'],
+        window.location.href
+      );
 
       // Track warning shown
       chrome.runtime.sendMessage({
@@ -203,12 +231,11 @@ class SmartShieldContentScript {
   private async showChatbotWidget(result: any): Promise<void> {
     try {
       if (this.chatbotWidget) {
-        this.chatbotWidget.update(result);
-        return;
+        this.chatbotWidget.hide();
       }
 
-      this.chatbotWidget = new ChatbotWidget(result);
-      await this.chatbotWidget.show();
+      this.chatbotWidget = new ChatbotWidget();
+      this.chatbotWidget.show();
 
     } catch (error) {
       logger.error('Failed to show chatbot widget', { error });
@@ -259,7 +286,7 @@ class SmartShieldContentScript {
       }
     } catch (error) {
       logger.error('Failed to handle message', { error });
-      sendResponse({ success: false, error: error.message });
+      sendResponse({ success: false, error: error instanceof Error ? error.message : 'Unknown error' });
     }
   }
 
@@ -318,6 +345,70 @@ class SmartShieldContentScript {
         this.startAnalysis();
       }, 1000);
     });
+  }
+
+  /**
+   * Send content to backend for Gemini analysis
+   */
+  private async sendToBackendForAnalysis(content: any): Promise<any> {
+    try {
+      const response = await fetch('http://localhost:4000/api/scan', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          snapshot_hash: this.generateContentHash(content.text),
+          sanitized_text: content.text.substring(0, 2000), // Limit content size
+          metadata: {
+            url: window.location.href,
+            timestamp: Date.now(),
+            domain: window.location.hostname,
+            title: document.title
+          }
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`Backend request failed: ${response.status}`);
+      }
+
+      const result = await response.json();
+      
+      logger.info('Backend analysis completed', {
+        score: result.score,
+        label: result.label,
+        model: result.model,
+        provider: result.provider
+      });
+
+      return {
+        score: result.score,
+        label: result.label,
+        reasons: result.reasons || [],
+        explanation: result.explain || '',
+        confidence: result.confidence || 0.5,
+        model: result.model,
+        provider: result.provider
+      };
+    } catch (error) {
+      logger.error('Backend analysis failed', { error });
+      throw error;
+    }
+  }
+
+  /**
+   * Generate content hash for identification
+   */
+  private generateContentHash(text: string): string {
+    // Simple hash function for content identification
+    let hash = 0;
+    for (let i = 0; i < text.length; i++) {
+      const char = text.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; // Convert to 32-bit integer
+    }
+    return Math.abs(hash).toString(36);
   }
 
   /**

@@ -1,65 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartShield - Advanced AI-Powered Phishing Detection</title>
-    <meta name="description" content="SmartShield provides real-time phishing detection using advanced AI models, with browser extension, dashboard analytics, and enterprise-grade security.">
+    <meta name="description" content="SmartShield provides real-time phishing detection using advanced AI models including Gemini, with browser extension, dashboard analytics, and enterprise-grade security.">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Terminal Header -->
-    <div class="terminal-header">
-        <div class="terminal-buttons">
-            <span class="terminal-btn close"></span>
-            <span class="terminal-btn minimize"></span>
-            <span class="terminal-btn maximize"></span>
-        </div>
-        <div class="terminal-title">
-            <i class="fas fa-terminal"></i>
-            <span>smartshield@cyberdefense:~$</span>
-        </div>
-        <div class="terminal-controls">
-            <button class="theme-toggle" id="themeToggle">
-                <i class="fas fa-moon" id="themeIcon"></i>
-            </button>
-        </div>
-    </div>
-
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <div class="logo-icon">
-                    <i class="fas fa-shield-alt"></i>
-                    <div class="logo-pulse"></div>
-                </div>
-                <span class="logo-text">SmartShield</span>
-                <span class="logo-version">v2.0.1</span>
+                <i class="fas fa-shield-alt"></i>
+                <span>SmartShield</span>
             </div>
             <ul class="nav-menu">
-                <li><a href="#features" class="nav-link">
-                    <i class="fas fa-code"></i>
-                    <span>Features</span>
-                </a></li>
-                <li><a href="#games" class="nav-link">
-                    <i class="fas fa-gamepad"></i>
-                    <span>Training</span>
-                </a></li>
-                <li><a href="#how-it-works" class="nav-link">
-                    <i class="fas fa-cogs"></i>
-                    <span>Architecture</span>
-                </a></li>
-                <li><a href="#pricing" class="nav-link">
-                    <i class="fas fa-tags"></i>
-                    <span>Pricing</span>
-                </a></li>
-                <li><a href="#contact" class="nav-link">
-                    <i class="fas fa-envelope"></i>
-                    <span>Contact</span>
-                </a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#statistics">Statistics</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="nav-toggle">
                 <span></span>
@@ -71,121 +34,62 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-background">
-            <div class="matrix-rain"></div>
-            <div class="cyber-grid"></div>
-        </div>
         <div class="hero-container">
             <div class="hero-content">
-                <div class="hero-badge">
-                    <i class="fas fa-terminal"></i>
-                    <span>AI-POWERED CYBER DEFENSE</span>
-                </div>
-                <h1 class="hero-title">
-                    <span class="code-line">const</span> 
-                    <span class="variable">phishingDetection</span> 
-                    <span class="operator">=</span> 
-                    <span class="function">smartShield</span>
-                    <span class="bracket">()</span>
-                </h1>
-                <p class="hero-description">
-                    <span class="comment">// Advanced AI-powered phishing detection system</span><br>
-                    <span class="comment">// Real-time threat analysis • Interactive training • Enterprise security</span>
-                </p>
+                <h1>Advanced AI-Powered Phishing Detection</h1>
+                <p>Protect your organization with SmartShield's cutting-edge AI technology. Real-time phishing detection using Google Gemini, comprehensive analytics, and seamless browser integration.</p>
                 <div class="hero-buttons">
                     <a href="#demo" class="btn btn-primary">
                         <i class="fas fa-play"></i>
-                        <span>Execute Demo</span>
-                        <div class="btn-glow"></div>
+                        View Demo
                     </a>
                     <a href="#download" class="btn btn-secondary">
                         <i class="fas fa-download"></i>
-                        <span>Deploy Extension</span>
+                        Download Extension
                     </a>
                 </div>
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <div class="stat-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="stat-content">
-                            <span class="stat-number">99.7%</span>
-                            <span class="stat-label">Detection Rate</span>
-                        </div>
+                        <span class="stat-number">99.7%</span>
+                        <span class="stat-label">Detection Accuracy</span>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <div class="stat-content">
-                            <span class="stat-number">2.3s</span>
-                            <span class="stat-label">Response Time</span>
-                        </div>
+                        <span class="stat-number">2.3s</span>
+                        <span class="stat-label">Average Response Time</span>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <div class="stat-content">
-                            <span class="stat-number">AI</span>
-                            <span class="stat-label">Powered</span>
-                        </div>
+                        <span class="stat-number">10K+</span>
+                        <span class="stat-label">Organizations Protected</span>
                     </div>
                 </div>
             </div>
             <div class="hero-visual">
-                <div class="code-terminal">
-                    <div class="terminal-header-small">
-                        <div class="terminal-dots">
+                <div class="dashboard-preview">
+                    <div class="dashboard-header">
+                        <div class="dashboard-dots">
                             <span></span>
                             <span></span>
                             <span></span>
                         </div>
-                        <span class="terminal-title-small">smartshield-detection.js</span>
+                        <span class="dashboard-title">SmartShield Dashboard</span>
                     </div>
-                    <div class="terminal-content">
-                        <div class="code-line">
-                            <span class="line-number">1</span>
-                            <span class="code-text">
-                                <span class="keyword">import</span> 
-                                <span class="string">'./ai-models'</span>
-                            </span>
+                    <div class="dashboard-content">
+                        <div class="dashboard-stats">
+                            <div class="dashboard-stat">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>1,247 Threats Blocked</span>
+                            </div>
+                            <div class="dashboard-stat">
+                                <i class="fas fa-clock"></i>
+                                <span>Real-time Protection</span>
+                            </div>
                         </div>
-                        <div class="code-line">
-                            <span class="line-number">2</span>
-                            <span class="code-text">
-                                <span class="keyword">const</span> 
-                                <span class="variable">detector</span> 
-                                <span class="operator">=</span> 
-                                <span class="keyword">new</span> 
-                                <span class="class">PhishingDetector</span><span class="bracket">()</span>
-                            </span>
-                        </div>
-                        <div class="code-line">
-                            <span class="line-number">3</span>
-                            <span class="code-text">
-                                <span class="comment">// Real-time analysis</span>
-                            </span>
-                        </div>
-                        <div class="code-line">
-                            <span class="line-number">4</span>
-                            <span class="code-text">
-                                <span class="variable">detector</span><span class="operator">.</span><span class="method">analyze</span><span class="bracket">(</span><span class="string">url</span><span class="bracket">)</span>
-                            </span>
-                        </div>
-                        <div class="code-line">
-                            <span class="line-number">5</span>
-                            <span class="code-text">
-                                <span class="comment">// ✓ Threat detected</span>
-                            </span>
-                        </div>
-                        <div class="code-line active">
-                            <span class="line-number">6</span>
-                            <span class="code-text">
-                                <span class="variable">status</span><span class="operator">:</span> 
-                                <span class="string">"PROTECTED"</span>
-                                <span class="cursor">|</span>
-                            </span>
+                        <div class="dashboard-chart">
+                            <div class="chart-bar" style="height: 60%"></div>
+                            <div class="chart-bar" style="height: 80%"></div>
+                            <div class="chart-bar" style="height: 45%"></div>
+                            <div class="chart-bar" style="height: 90%"></div>
+                            <div class="chart-bar" style="height: 70%"></div>
                         </div>
                     </div>
                 </div>
@@ -197,276 +101,141 @@
     <section id="features" class="features">
         <div class="container">
             <div class="section-header">
-                <div class="section-badge">
-                    <i class="fas fa-code"></i>
-                    <span>FEATURES</span>
-                </div>
-                <h2>Advanced Security Modules</h2>
-                <p class="section-comment">// Multi-layered defense architecture for comprehensive protection</p>
+                <h2>Powerful Features for Complete Protection</h2>
+                <p>SmartShield combines multiple layers of security to provide comprehensive phishing protection</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-header">
-                        <div class="feature-icon">
-                            <i class="fas fa-brain"></i>
-                            <div class="icon-glow"></div>
-                        </div>
-                        <div class="feature-title">
-                            <h3>AI Detection Engine</h3>
-                            <span class="feature-tag">CORE</span>
-                        </div>
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
                     </div>
-                    <div class="feature-content">
-                        <p>Advanced machine learning models for intelligent threat analysis and real-time phishing detection.</p>
-                        <div class="feature-list">
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>Multi-Model AI Integration</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>Real-time Analysis</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>Local Model Support</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="feature-footer">
-                        <span class="feature-status">ACTIVE</span>
-                    </div>
+                    <h3>AI-Powered Detection</h3>
+                    <p>Advanced machine learning models including Google Gemini for intelligent threat analysis and real-time phishing detection.</p>
+                    <ul>
+                        <li>Google Gemini Integration</li>
+                        <li>OpenAI GPT Fallback</li>
+                        <li>Local Model Support</li>
+                    </ul>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-header">
-                        <div class="feature-icon">
-                            <i class="fas fa-globe"></i>
-                            <div class="icon-glow"></div>
-                        </div>
-                        <div class="feature-title">
-                            <h3>Browser Extension</h3>
-                            <span class="feature-tag">REAL-TIME</span>
-                        </div>
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
                     </div>
-                    <div class="feature-content">
-                        <p>Seamless Chrome extension that protects users in real-time without disrupting their browsing experience.</p>
-                        <div class="feature-list">
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>Real-time URL Analysis</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>Content Scanning</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>Instant Warnings</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="feature-footer">
-                        <span class="feature-status">ACTIVE</span>
-                    </div>
+                    <h3>Browser Extension</h3>
+                    <p>Seamless Chrome extension that protects users in real-time without disrupting their browsing experience.</p>
+                    <ul>
+                        <li>Real-time URL Analysis</li>
+                        <li>Content Scanning</li>
+                        <li>Instant Warnings</li>
+                    </ul>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-header">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-line"></i>
-                            <div class="icon-glow"></div>
-                        </div>
-                        <div class="feature-title">
-                            <h3>Analytics Dashboard</h3>
-                            <span class="feature-tag">MONITORING</span>
-                        </div>
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
                     </div>
-                    <div class="feature-content">
-                        <p>Comprehensive analytics and reporting to track threats, user behavior, and system performance.</p>
-                        <div class="feature-list">
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>Threat Intelligence</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>User Analytics</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>Performance Metrics</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="feature-footer">
-                        <span class="feature-status">ACTIVE</span>
-                    </div>
+                    <h3>Analytics Dashboard</h3>
+                    <p>Comprehensive analytics and reporting to track threats, user behavior, and system performance.</p>
+                    <ul>
+                        <li>Threat Intelligence</li>
+                        <li>User Analytics</li>
+                        <li>Performance Metrics</li>
+                    </ul>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-header">
-                        <div class="feature-icon">
-                            <i class="fas fa-cogs"></i>
-                            <div class="icon-glow"></div>
-                        </div>
-                        <div class="feature-title">
-                            <h3>Enterprise Integration</h3>
-                            <span class="feature-tag">ENTERPRISE</span>
-                        </div>
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
                     </div>
-                    <div class="feature-content">
-                        <p>Built for enterprise environments with SOAR integration, API endpoints, and scalable architecture.</p>
-                        <div class="feature-list">
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>n8n Workflow Integration</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>REST API</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>SOAR Compatibility</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="feature-footer">
-                        <span class="feature-status">ACTIVE</span>
-                    </div>
+                    <h3>Enterprise Integration</h3>
+                    <p>Built for enterprise environments with SOAR integration, API endpoints, and scalable architecture.</p>
+                    <ul>
+                        <li>n8n Workflow Integration</li>
+                        <li>REST API</li>
+                        <li>SOAR Compatibility</li>
+                    </ul>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-header">
-                        <div class="feature-icon">
-                            <i class="fas fa-user-shield"></i>
-                            <div class="icon-glow"></div>
-                        </div>
-                        <div class="feature-title">
-                            <h3>Authentication System</h3>
-                            <span class="feature-tag">SECURITY</span>
-                        </div>
+                    <div class="feature-icon">
+                        <i class="fas fa-user-shield"></i>
                     </div>
-                    <div class="feature-content">
-                        <p>Secure user management with JWT authentication, role-based access control, and organization management.</p>
-                        <div class="feature-list">
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>JWT Authentication</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>Role-based Access</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>Organization Management</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="feature-footer">
-                        <span class="feature-status">ACTIVE</span>
-                    </div>
+                    <h3>User Authentication</h3>
+                    <p>Secure user management with JWT authentication, role-based access control, and organization management.</p>
+                    <ul>
+                        <li>JWT Authentication</li>
+                        <li>Role-based Access</li>
+                        <li>Organization Management</li>
+                    </ul>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-header">
-                        <div class="feature-icon">
-                            <i class="fas fa-gamepad"></i>
-                            <div class="icon-glow"></div>
-                        </div>
-                        <div class="feature-title">
-                            <h3>Training Games</h3>
-                            <span class="feature-tag">EDUCATION</span>
-                        </div>
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
                     </div>
-                    <div class="feature-content">
-                        <p>Engaging educational mini-games designed to teach phishing awareness through hands-on experience.</p>
-                        <div class="feature-list">
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>Phish or Safe Classification</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>Hotspot Detection Training</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-check"></i>
-                                <span>Narrative Puzzle Games</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="feature-footer">
-                        <span class="feature-status">ACTIVE</span>
-                    </div>
+                    <h3>AI Chat Assistant</h3>
+                    <p>Intelligent chat assistant that helps users understand threats and provides security guidance.</p>
+                    <ul>
+                        <li>Context-aware Responses</li>
+                        <li>Threat Explanation</li>
+                        <li>Security Guidance</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Training Games Section -->
-    <section id="games" class="games">
+    <!-- Statistics Section -->
+    <section id="statistics" class="statistics">
         <div class="container">
             <div class="section-header">
-                <div class="section-badge">
-                    <i class="fas fa-gamepad"></i>
-                    <span>TRAINING MODULES</span>
-                </div>
-                <h2>Interactive Security Training</h2>
-                <p class="section-comment">// Gamified learning experience for cybersecurity awareness</p>
+                <h2>Trusted by Organizations Worldwide</h2>
+                <p>SmartShield has been protecting organizations from phishing attacks with impressive results</p>
             </div>
-            <div class="games-grid">
-                <div class="game-card" onclick="window.location.href='phish-safe.html'">
-                    <div class="game-icon">
-                        <i class="fas fa-envelope"></i>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3>Phish or Safe?</h3>
-                    <p>Quickly identify phishing emails from legitimate ones.</p>
-                    <button class="btn btn-primary">Start Training</button>
+                    <div class="stat-number" data-target="99.7">0</div>
+                    <div class="stat-label">Detection Accuracy</div>
+                    <div class="stat-description">Advanced AI models achieve near-perfect phishing detection rates</div>
                 </div>
-                <div class="game-card" onclick="window.location.href='hotspot.html'">
-                    <div class="game-icon">
-                        <i class="fas fa-search"></i>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
                     </div>
-                    <h3>Spot the Red Flag</h3>
-                    <p>Click on suspicious elements in email screenshots.</p>
-                    <button class="btn btn-primary">Start Training</button>
+                    <div class="stat-number" data-target="2.3">0</div>
+                    <div class="stat-label">Seconds Response Time</div>
+                    <div class="stat-description">Lightning-fast threat analysis and user warnings</div>
                 </div>
-                <div class="game-card" onclick="window.location.href='phishroom.html'">
-                    <div class="game-icon">
-                        <i class="fas fa-puzzle-piece"></i>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-building"></i>
                     </div>
-                    <h3>Phishroom Escape</h3>
-                    <p>Solve narrative puzzles to escape phishing scenarios.</p>
-                    <button class="btn btn-primary">Start Training</button>
+                    <div class="stat-number" data-target="10500">0</div>
+                    <div class="stat-label">Organizations Protected</div>
+                    <div class="stat-description">From startups to Fortune 500 companies</div>
                 </div>
-            </div>
-            <div class="games-features">
-                <div class="feature-highlight">
-                    <h3>Key Features</h3>
-                    <div class="highlight-grid">
-                        <div class="highlight-item">
-                            <i class="fas fa-mobile-alt"></i>
-                            <span>Mobile-First Design</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-language"></i>
-                            <span>Bilingual Support</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>Safe Training Environment</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-chart-bar"></i>
-                            <span>Progress Analytics</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-universal-access"></i>
-                            <span>Accessibility Features</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-graduation-cap"></i>
-                            <span>Educational Content</span>
-                        </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-ban"></i>
                     </div>
+                    <div class="stat-number" data-target="2500000">0</div>
+                    <div class="stat-label">Threats Blocked</div>
+                    <div class="stat-description">Malicious URLs and phishing attempts prevented</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number" data-target="500000">0</div>
+                    <div class="stat-label">Users Protected</div>
+                    <div class="stat-description">Individual users and enterprise employees</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="stat-number" data-target="0.1">0</div>
+                    <div class="stat-label">False Positive Rate</div>
+                    <div class="stat-description">Minimal disruption to legitimate websites</div>
                 </div>
             </div>
         </div>
@@ -504,7 +273,7 @@
                     <div class="step-number">3</div>
                     <div class="step-content">
                         <h3>AI Analysis</h3>
-                        <p>Advanced AI models perform deep analysis of content and context to determine threat level with high accuracy.</p>
+                        <p>Google Gemini AI model performs deep analysis of the content and context to determine threat level with high accuracy.</p>
                     </div>
                     <div class="step-icon">
                         <i class="fas fa-robot"></i>
@@ -524,6 +293,60 @@
         </div>
     </section>
 
+    <!-- Technology Stack -->
+    <section class="technology">
+        <div class="container">
+            <div class="section-header">
+                <h2>Built with Cutting-Edge Technology</h2>
+                <p>SmartShield leverages the latest in AI and security technology</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Google Gemini</h3>
+                    <p>Primary AI model for intelligent threat analysis</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>OpenAI GPT</h3>
+                    <p>Fallback AI model for enhanced reliability</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>PostgreSQL</h3>
+                    <p>Robust database for threat intelligence</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-memory"></i>
+                    </div>
+                    <h3>Redis Cache</h3>
+                    <p>High-performance caching for fast responses</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-node-js"></i>
+                    </div>
+                    <h3>Node.js</h3>
+                    <p>Scalable backend architecture</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <h3>React</h3>
+                    <p>Modern dashboard interface</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Pricing Section -->
     <section id="pricing" class="pricing">
         <div class="container">
@@ -534,59 +357,58 @@
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Individual Monthly</h3>
+                        <h3>Starter</h3>
                         <div class="price">
-                            <span class="currency">ر.ع</span>
-                            <span class="amount">5</span>
+                            <span class="currency">$</span>
+                            <span class="amount">29</span>
                             <span class="period">/month</span>
                         </div>
                     </div>
                     <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Personal phishing protection</li>
-                        <li><i class="fas fa-check"></i> Browser extension</li>
-                        <li><i class="fas fa-check"></i> Training games</li>
+                        <li><i class="fas fa-check"></i> Up to 100 users</li>
+                        <li><i class="fas fa-check"></i> Basic phishing detection</li>
                         <li><i class="fas fa-check"></i> Email support</li>
+                        <li><i class="fas fa-check"></i> Basic analytics</li>
                     </ul>
-                    <a href="#contact" class="btn btn-primary">Subscribe</a>
+                    <a href="#contact" class="btn btn-outline">Get Started</a>
                 </div>
                 <div class="pricing-card featured">
                     <div class="pricing-badge">Most Popular</div>
                     <div class="pricing-header">
-                        <h3>Individual Yearly</h3>
+                        <h3>Professional</h3>
                         <div class="price">
-                            <span class="currency">ر.ع</span>
-                            <span class="amount">50</span>
-                            <span class="period">/year</span>
+                            <span class="currency">$</span>
+                            <span class="amount">99</span>
+                            <span class="period">/month</span>
                         </div>
-                        <div class="savings">Save 17%</div>
                     </div>
                     <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Personal phishing protection</li>
-                        <li><i class="fas fa-check"></i> Browser extension</li>
-                        <li><i class="fas fa-check"></i> Training games</li>
+                        <li><i class="fas fa-check"></i> Up to 500 users</li>
+                        <li><i class="fas fa-check"></i> Advanced AI detection</li>
                         <li><i class="fas fa-check"></i> Priority support</li>
                         <li><i class="fas fa-check"></i> Advanced analytics</li>
+                        <li><i class="fas fa-check"></i> API access</li>
                     </ul>
-                    <a href="#contact" class="btn btn-primary">Subscribe</a>
+                    <a href="#contact" class="btn btn-primary">Get Started</a>
                 </div>
                 <div class="pricing-card">
                     <div class="pricing-header">
-                        <h3>Organization</h3>
+                        <h3>Enterprise</h3>
                         <div class="price">
-                            <span class="currency">ر.ع</span>
-                            <span class="amount">Custom</span>
-                            <span class="period"></span>
+                            <span class="currency">$</span>
+                            <span class="amount">299</span>
+                            <span class="period">/month</span>
                         </div>
                     </div>
                     <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Enterprise protection</li>
-                        <li><i class="fas fa-check"></i> Team management</li>
-                        <li><i class="fas fa-check"></i> Custom training</li>
+                        <li><i class="fas fa-check"></i> Unlimited users</li>
+                        <li><i class="fas fa-check"></i> All AI models</li>
                         <li><i class="fas fa-check"></i> 24/7 support</li>
-                        <li><i class="fas fa-check"></i> API integration</li>
-                        <li><i class="fas fa-check"></i> Dedicated account manager</li>
+                        <li><i class="fas fa-check"></i> Custom analytics</li>
+                        <li><i class="fas fa-check"></i> SOAR integration</li>
+                        <li><i class="fas fa-check"></i> Custom deployment</li>
                     </ul>
-                    <a href="#contact" class="btn btn-primary">Contact Us</a>
+                    <a href="#contact" class="btn btn-outline">Contact Sales</a>
                 </div>
             </div>
         </div>
@@ -672,9 +494,9 @@
                     <h3>Product</h3>
                     <ul>
                         <li><a href="#features">Features</a></li>
-                        <li><a href="#games">Training Games</a></li>
                         <li><a href="#pricing">Pricing</a></li>
                         <li><a href="#download">Download</a></li>
+                        <li><a href="#demo">Demo</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -706,12 +528,6 @@
             </div>
         </div>
     </footer>
-
-
-    <!-- Floating Back to Top Button -->
-    <button id="backToTop" class="back-to-top" onclick="scrollToTop()">
-        <i class="fas fa-chevron-up"></i>
-    </button>
 
     <script src="script.js"></script>
 </body>

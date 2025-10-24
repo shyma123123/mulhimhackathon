@@ -9,9 +9,9 @@
  * - Lightweight ML-based scoring
  */
 
-import { ContentData } from '@/types/content';
-import { logger } from '@/utils/logger';
-import { generateHash, sanitizeContent } from '@/utils/sanitization';
+import { ContentData } from '../types/content';
+import { logger } from '../utils/logger';
+import { generateHash, sanitizeContent } from '../utils/sanitization';
 
 export interface DetectionResult {
   score: number; // 0-1, where 1 is definitely phishing
@@ -20,6 +20,8 @@ export interface DetectionResult {
   confidence: number;
   localAnalysis: boolean;
   requiresCloudAnalysis: boolean;
+  model?: string;
+  provider?: string;
   metadata: {
     urlScore?: number;
     contentScore?: number;
@@ -239,6 +241,8 @@ export class PhishingDetector {
       confidence,
       localAnalysis: true,
       requiresCloudAnalysis: false,
+      model: 'local-heuristics',
+      provider: 'local',
       metadata
     };
   }

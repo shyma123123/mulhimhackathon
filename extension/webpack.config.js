@@ -9,10 +9,10 @@ module.exports = (env, argv) => {
     entry: {
       background: './src/background/background.ts',
       content: './src/content/content.ts',
-      popup: './src/popup/popup.tsx',
-      options: './src/options/options.tsx',
-      warning: './src/warning/warning.tsx',
-      chatbot: './src/chatbot/chatbot.tsx'
+      popup: './src/popup/index.tsx',
+      options: './src/options/index.tsx',
+      warning: './src/warning/index.tsx',
+      chatbot: './src/chatbot/index.tsx'
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
@@ -81,6 +81,10 @@ module.exports = (env, argv) => {
           {
             from: 'src/chatbot/chatbot.html',
             to: 'chatbot.html'
+          },
+          {
+            from: 'src/content/content.css',
+            to: 'content.css'
           }
         ]
       }),

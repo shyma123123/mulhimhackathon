@@ -355,7 +355,7 @@ class PhishroomGame {
     const percentage = (this.currentStep / this.maxSteps) * 100;
     
     progressFill.style.width = `${percentage}%`;
-    progressText.textContent = `Step ${this.currentStep} of ${this.maxSteps}`;
+    progressText.textContent = `Step ${this.currentStep + 1} of ${this.maxSteps}`;
   }
 
   updateInventory() {
