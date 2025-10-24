@@ -39,7 +39,7 @@ const scanRequestSchema = Joi.object({
  * POST /api/scan
  * Analyze content for phishing indicators
  */
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', async (req: Request, res: Response): Promise<void> => {
   const correlationId = generateCorrelationId();
   const startTime = Date.now();
 
@@ -162,7 +162,7 @@ router.post('/', async (req: Request, res: Response) => {
  * GET /api/scan/:snapshotHash
  * Retrieve previous scan result by snapshot hash
  */
-router.get('/:snapshotHash', async (req: Request, res: Response) => {
+router.get('/:snapshotHash', async (req: Request, res: Response): Promise<void> => {
   const { snapshotHash } = req.params;
   const correlationId = generateCorrelationId();
 

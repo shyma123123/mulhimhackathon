@@ -197,16 +197,16 @@ Respond with ONLY the JSON object, no additional text.`;
   }
 
   private buildChatPrompt(context: string, question: string): string {
-    return `You are a helpful cybersecurity assistant. A user has flagged the following content as potentially suspicious and is asking for an explanation:
+    return `You are a helpful cybersecurity assistant. A user has flagged content as potentially suspicious and is asking for an explanation.
 
 CONTEXT:
 ${context}
 
 USER QUESTION: ${question}
 
-Please provide a clear, helpful explanation. If the content appears to be phishing, explain why and what the user should do. If it appears legitimate, explain why and provide reassurance.
+Please provide a clear, helpful, and conversational response. Be specific about what you found in the flagged content. If it appears to be phishing, explain the specific indicators and what the user should do. If it appears legitimate, explain why and provide reassurance. 
 
-Keep your response concise but informative (2-3 sentences max).`;
+Keep your response natural and engaging (2-4 sentences). Avoid generic responses - be specific about the content being discussed.`;
   }
 
   private parseAnalysisResponse(data: any): AnalysisResponse {
@@ -400,16 +400,16 @@ Respond with ONLY the JSON object, no additional text.`;
   }
 
   private buildChatPrompt(context: string, question: string): string {
-    return `You are a helpful cybersecurity assistant. A user has flagged the following content as potentially suspicious and is asking for an explanation:
+    return `You are a helpful cybersecurity assistant. A user has flagged content as potentially suspicious and is asking for an explanation.
 
 CONTEXT:
 ${context}
 
 USER QUESTION: ${question}
 
-Please provide a clear, helpful explanation. If the content appears to be phishing, explain why and what the user should do. If it appears legitimate, explain why and provide reassurance.
+Please provide a clear, helpful, and conversational response. Be specific about what you found in the flagged content. If it appears to be phishing, explain the specific indicators and what the user should do. If it appears legitimate, explain why and provide reassurance. 
 
-Keep your response concise but informative (2-3 sentences max).`;
+Keep your response natural and engaging (2-4 sentences). Avoid generic responses - be specific about the content being discussed.`;
   }
 
   private parseAnalysisResponse(data: any): AnalysisResponse {
