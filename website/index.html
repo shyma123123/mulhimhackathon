@@ -529,6 +529,37 @@
         </div>
     </footer>
 
+    <!-- Chatbot Widget -->
+    <div id="chatbot-widget" class="chatbot-widget" style="display: none;">
+        <div class="chatbot-header" id="chatbot-header">
+            <h3 data-en="SmartShield Assistant" data-ar="مساعد الدرع الذكي">SmartShield Assistant</h3>
+            <div class="chatbot-controls">
+                <button onclick="minimizeChatbot()" class="chatbot-minimize" title="Minimize">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button onclick="toggleFullscreen()" class="chatbot-maximize" id="maximize-btn" title="Maximize">
+                    <i class="fas fa-expand"></i>
+                </button>
+                <button onclick="hideChatbot()" class="chatbot-close" title="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="chatbot-message bot">
+                <div class="message-content">
+                    <div class="message-text" data-en="Hello! I'm SmartShield Assistant. How can I help you with cybersecurity today?" data-ar="مرحباً! أنا مساعد الدرع الذكي. كيف يمكنني مساعدتك في الأمن السيبراني اليوم؟">Hello! I'm SmartShield Assistant. How can I help you with cybersecurity today?</div>
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input-field" placeholder="Type your message..." data-en-placeholder="Type your message..." data-ar-placeholder="اكتب رسالتك...">
+            <button onclick="sendChatbotMessage()" class="chatbot-send">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

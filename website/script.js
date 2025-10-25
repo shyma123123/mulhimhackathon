@@ -384,3 +384,217 @@ document.addEventListener('DOMContentLoaded', function() {
     const lazyImages = document.querySelectorAll('img[data-src]');
     lazyImages.forEach(img => imageObserver.observe(img));
 });
+
+// Chatbot Functions
+let isFullscreen = false;
+let isMinimized = false;
+let originalSize = { width: '350px', height: '500px' };
+
+function showChatbot() {
+    const chatbot = document.getElementById('chatbot-widget');
+    chatbot.style.display = 'block';
+    chatbot.classList.add('show');
+    chatbot.classList.remove('hide');
+    
+    // Focus on input field
+    setTimeout(() => {
+        const input = document.getElementById('chatbot-input-field');
+        if (input) input.focus();
+    }, 300);
+}
+
+function hideChatbot() {
+    const chatbot = document.getElementById('chatbot-widget');
+    chatbot.classList.add('hide');
+    chatbot.classList.remove('show');
+    setTimeout(() => {
+        chatbot.style.display = 'none';
+        chatbot.classList.remove('hide');
+    }, 300);
+}
+
+function minimizeChatbot() {
+    const chatbot = document.getElementById('chatbot-widget');
+    const messages = document.getElementById('chatbot-messages');
+    const input = document.querySelector('.chatbot-input');
+    
+    if (isMinimized) {
+        // Restore
+        chatbot.style.height = originalSize.height;
+        messages.style.display = 'block';
+        input.style.display = 'flex';
+        isMinimized = false;
+    } else {
+        // Minimize
+        originalSize.height = chatbot.style.height || '500px';
+        chatbot.style.height = '60px';
+        messages.style.display = 'none';
+        input.style.display = 'none';
+        isMinimized = true;
+    }
+}
+
+function toggleFullscreen() {
+    const chatbot = document.getElementById('chatbot-widget');
+    const maximizeBtn = document.getElementById('maximize-btn');
+    const icon = maximizeBtn.querySelector('i');
+    
+    if (isFullscreen) {
+        // Exit fullscreen
+        chatbot.classList.remove('fullscreen');
+        chatbot.style.width = originalSize.width;
+        chatbot.style.height = originalSize.height;
+        icon.className = 'fas fa-expand';
+        maximizeBtn.title = 'Maximize';
+        isFullscreen = false;
+    } else {
+        // Enter fullscreen
+        originalSize.width = chatbot.style.width || '350px';
+        originalSize.height = chatbot.style.height || '500px';
+        chatbot.classList.add('fullscreen');
+        icon.className = 'fas fa-compress';
+        maximizeBtn.title = 'Restore';
+        isFullscreen = true;
+    }
+}
+
+function sendChatbotMessage() {
+    const input = document.getElementById('chatbot-input-field');
+    const message = input.value.trim();
+    if (!message) return;
+
+    const messagesContainer = document.getElementById('chatbot-messages');
+
+    // Add user message
+    const userMessage = document.createElement('div');
+    userMessage.className = 'chatbot-message user';
+    userMessage.innerHTML = `
+        <div class="message-content">
+            <div class="message-text">${message}</div>
+        </div>
+    `;
+    messagesContainer.appendChild(userMessage);
+
+    // Clear input
+    input.value = '';
+
+    // Add loading indicator
+    const loadingMessage = document.createElement('div');
+    loadingMessage.className = 'chatbot-message bot';
+    loadingMessage.innerHTML = `
+        <div class="message-content">
+            <div class="message-text">${currentLanguage === 'ar' ? 'جاري التفكير...' : 'Thinking...'}</div>
+        </div>
+    `;
+    messagesContainer.appendChild(loadingMessage);
+
+    // Scroll to bottom
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    // Call backend API
+    fetch('http://localhost:4000/api/chat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            message: message,
+            sessionId: 'website-session-' + Date.now(),
+            context: 'User is asking about cybersecurity and phishing protection'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Remove loading message
+        messagesContainer.removeChild(loadingMessage);
+        
+        // Add bot response
+        const botMessage = document.createElement('div');
+        botMessage.className = 'chatbot-message bot';
+        const responseText = data.data && data.data.messages && data.data.messages.length > 0 
+            ? data.data.messages[data.data.messages.length - 1].content
+            : (currentLanguage === 'ar' ? 'عذراً، حدث خطأ في الاتصال بالخادم.' : 'Sorry, there was an error connecting to the server.');
+        
+        botMessage.innerHTML = `
+            <div class="message-content">
+                <div class="message-text">${responseText}</div>
+            </div>
+        `;
+        messagesContainer.appendChild(botMessage);
+        
+        // Scroll to bottom
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    })
+    .catch(error => {
+        console.error('Chatbot API error:', error);
+        // Remove loading message
+        messagesContainer.removeChild(loadingMessage);
+        
+        // Add error message
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'chatbot-message bot';
+        errorMessage.innerHTML = `
+            <div class="message-content">
+                <div class="message-text">${currentLanguage === 'ar' ? 'عذراً، لا يمكنني الاتصال بالخادم حالياً. يرجى المحاولة لاحقاً.' : 'Sorry, I cannot connect to the server right now. Please try again later.'}</div>
+            </div>
+        `;
+        messagesContainer.appendChild(errorMessage);
+        
+        // Scroll to bottom
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    });
+}
+
+// Make chatbot draggable
+let isDragging = false;
+let dragOffset = { x: 0, y: 0 };
+
+document.addEventListener('DOMContentLoaded', function() {
+    const chatbot = document.getElementById('chatbot-widget');
+    const header = document.getElementById('chatbot-header');
+    
+    if (header) {
+        header.addEventListener('mousedown', function(e) {
+            if (!isFullscreen) {
+                isDragging = true;
+                const rect = chatbot.getBoundingClientRect();
+                dragOffset.x = e.clientX - rect.left;
+                dragOffset.y = e.clientY - rect.top;
+                chatbot.style.cursor = 'grabbing';
+            }
+        });
+    }
+    
+    document.addEventListener('mousemove', function(e) {
+        if (isDragging && !isFullscreen) {
+            const x = e.clientX - dragOffset.x;
+            const y = e.clientY - dragOffset.y;
+            
+            // Keep chatbot within viewport
+            const maxX = window.innerWidth - chatbot.offsetWidth;
+            const maxY = window.innerHeight - chatbot.offsetHeight;
+            
+            chatbot.style.left = Math.max(0, Math.min(x, maxX)) + 'px';
+            chatbot.style.top = Math.max(0, Math.min(y, maxY)) + 'px';
+            chatbot.style.right = 'auto';
+            chatbot.style.bottom = 'auto';
+        }
+    });
+    
+    document.addEventListener('mouseup', function() {
+        if (isDragging) {
+            isDragging = false;
+            chatbot.style.cursor = 'default';
+        }
+    });
+    
+    // Allow Enter key to send message
+    const chatbotInput = document.getElementById('chatbot-input-field');
+    if (chatbotInput) {
+        chatbotInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendChatbotMessage();
+            }
+        });
+    }
+});

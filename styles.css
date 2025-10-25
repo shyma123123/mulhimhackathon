@@ -1161,6 +1161,10 @@ body {
     right: 20px;
     width: 350px;
     height: 500px;
+    min-width: 300px;
+    min-height: 300px;
+    max-width: 90vw;
+    max-height: 90vh;
     background: white;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -1168,6 +1172,22 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    resize: both;
+    border: 2px solid #e9ecef;
+    box-sizing: border-box;
+}
+
+.chatbot-widget.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
+    resize: none;
+    z-index: 9999;
 }
 
 .chatbot-header {
@@ -1194,11 +1214,53 @@ body {
     padding: 5px;
 }
 
+.chatbot-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.chatbot-minimize {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 3px;
+    transition: background 0.2s ease;
+}
+
+.chatbot-minimize:hover,
+.chatbot-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
 .chatbot-messages {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
+    overflow-x: hidden;
     background: #f8f9fa;
+    scroll-behavior: smooth;
+    min-height: 0;
+}
+
+.chatbot-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chatbot-messages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.chatbot-messages::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.chatbot-messages::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 .chatbot-message {

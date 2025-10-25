@@ -384,3 +384,125 @@ document.addEventListener('DOMContentLoaded', function() {
     const lazyImages = document.querySelectorAll('img[data-src]');
     lazyImages.forEach(img => imageObserver.observe(img));
 });
+
+// Chatbot Functions
+function showChatbot() {
+    const chatbot = document.getElementById('chatbot-widget');
+    chatbot.style.display = 'block';
+    chatbot.classList.add('fullscreen');
+    chatbot.style.animation = 'slideInUp 0.3s ease-out';
+    
+    // Focus on input field
+    setTimeout(() => {
+        const input = document.getElementById('chatbot-input-field');
+        if (input) input.focus();
+    }, 300);
+}
+
+function hideChatbot() {
+    const chatbot = document.getElementById('chatbot-widget');
+    chatbot.classList.remove('fullscreen');
+    chatbot.style.animation = 'slideOutDown 0.3s ease-out';
+    setTimeout(() => {
+        chatbot.style.display = 'none';
+    }, 300);
+}
+
+function sendChatbotMessage() {
+    const input = document.getElementById('chatbot-input-field');
+    const message = input.value.trim();
+    if (!message) return;
+
+    const messagesContainer = document.getElementById('chatbot-messages');
+
+    // Add user message
+    const userMessage = document.createElement('div');
+    userMessage.className = 'chatbot-message user';
+    userMessage.innerHTML = `
+        <div class="message-content">
+            <div class="message-text">${message}</div>
+        </div>
+    `;
+    messagesContainer.appendChild(userMessage);
+
+    // Clear input
+    input.value = '';
+
+    // Add loading indicator
+    const loadingMessage = document.createElement('div');
+    loadingMessage.className = 'chatbot-message bot';
+    loadingMessage.innerHTML = `
+        <div class="message-content">
+            <div class="message-text">${currentLanguage === 'ar' ? 'جاري التفكير...' : 'Thinking...'}</div>
+        </div>
+    `;
+    messagesContainer.appendChild(loadingMessage);
+
+    // Scroll to bottom
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    // Call backend API
+    fetch('http://localhost:4000/api/chat', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            message: message,
+            sessionId: 'website-session-' + Date.now(),
+            context: 'User is asking about cybersecurity and phishing protection'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Remove loading message
+        messagesContainer.removeChild(loadingMessage);
+        
+        // Add bot response
+        const botMessage = document.createElement('div');
+        botMessage.className = 'chatbot-message bot';
+        const responseText = data.data && data.data.messages && data.data.messages.length > 0 
+            ? data.data.messages[data.data.messages.length - 1].content
+            : (currentLanguage === 'ar' ? 'عذراً، حدث خطأ في الاتصال بالخادم.' : 'Sorry, there was an error connecting to the server.');
+        
+        botMessage.innerHTML = `
+            <div class="message-content">
+                <div class="message-text">${responseText}</div>
+            </div>
+        `;
+        messagesContainer.appendChild(botMessage);
+        
+        // Scroll to bottom
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    })
+    .catch(error => {
+        console.error('Chatbot API error:', error);
+        // Remove loading message
+        messagesContainer.removeChild(loadingMessage);
+        
+        // Add error message
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'chatbot-message bot';
+        errorMessage.innerHTML = `
+            <div class="message-content">
+                <div class="message-text">${currentLanguage === 'ar' ? 'عذراً، لا يمكنني الاتصال بالخادم حالياً. يرجى المحاولة لاحقاً.' : 'Sorry, I cannot connect to the server right now. Please try again later.'}</div>
+            </div>
+        `;
+        messagesContainer.appendChild(errorMessage);
+        
+        // Scroll to bottom
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    });
+}
+
+// Allow Enter key to send message
+document.addEventListener('DOMContentLoaded', function() {
+    const chatbotInput = document.getElementById('chatbot-input-field');
+    if (chatbotInput) {
+        chatbotInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendChatbotMessage();
+            }
+        });
+    }
+});
