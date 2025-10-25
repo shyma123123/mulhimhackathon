@@ -1,27 +1,30 @@
 {
-  "name": "smartshield-phishing-detector",
+  "name": "smartshield-landing-page",
   "version": "1.0.0",
-  "description": "Production-ready Google Chrome extension + backend + analytics dashboard for phishing detection",
-  "main": "index.js",
+  "description": "Professional landing page for SmartShield - AI-Powered Phishing Detection",
+  "main": "index.html",
   "scripts": {
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:dashboard\"",
-    "dev:backend": "cd backend && npm run dev",
-    "dev:dashboard": "cd dashboard && npm run dev",
-    "build": "npm run build:backend && npm run build:dashboard && npm run build:extension",
-    "build:backend": "cd backend && npm run build",
-    "build:dashboard": "cd dashboard && npm run build",
-    "build:extension": "cd extension && npm run build",
-    "test": "npm run test:backend && npm run test:extension",
-    "test:backend": "cd backend && npm test",
-    "test:extension": "cd extension && npm test",
-    "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose down",
-    "docker:build": "docker-compose build"
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "echo 'No build process needed for static site'",
+    "serve": "python -m http.server 3000"
   },
-  "keywords": ["phishing", "security", "chrome-extension", "ml", "cybersecurity"],
+  "keywords": [
+    "landing-page",
+    "phishing-detection",
+    "cybersecurity",
+    "ai",
+    "smartshield"
+  ],
   "author": "SmartShield Team",
   "license": "MIT",
-  "devDependencies": {
-    "concurrently": "^8.2.2"
-  }
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smartshield/landing-page.git"
+  },
+  "homepage": "https://smartshield.ai"
 }
