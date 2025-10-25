@@ -62,6 +62,29 @@ app.post('/api/chat', async (req, res) => {
     if (!openaiResponse.ok) {
       const errorText = await openaiResponse.text();
       console.error('OpenAI API error:', openaiResponse.status, errorText);
+      
+      // Handle rate limiting gracefully
+      if (openaiResponse.status === 429) {
+        res.json({
+          success: true,
+          message: 'Rate limited - using fallback response',
+          data: {
+            sessionId: sessionId,
+            messages: [
+              {
+                role: 'user',
+                content: userMessage
+              },
+              {
+                role: 'assistant',
+                content: 'I apologize, but I\'m currently experiencing high demand. Please try again in a few moments. In the meantime, remember to always verify suspicious emails and never click on links from unknown senders.'
+              }
+            ]
+          }
+        });
+        return;
+      }
+      
       throw new Error(`OpenAI API error: ${openaiResponse.status}`);
     }
 
