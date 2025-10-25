@@ -4,9 +4,23 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
+        // Light theme colors
+        light: {
+          bg: '#ffffff',
+          fg: '#1f2937',
+          primary: '#3b82f6',
+          success: '#10b981',
+          warning: '#f59e0b',
+          error: '#ef4444',
+          muted: '#6b7280',
+          border: '#e5e7eb',
+          accent: '#f9fafb',
+        },
+        // Dark theme colors (terminal)
         terminal: {
           bg: '#0d1117',
           fg: '#c9d1d9',
