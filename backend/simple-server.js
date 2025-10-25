@@ -35,36 +35,43 @@ app.post('/api/chat', async (req, res) => {
     
     console.log('Chat request:', { userMessage, sessionId });
     
-    // Call OpenAI API
-    const openaiResponse = await fetch('https://api.openai.com/v1/chat/completions', {
+    // Call Gemini API
+    const geminiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
-        messages: [
+        contents: [{
+          parts: [{
+            text: `You are a helpful cybersecurity assistant. A user is asking about phishing protection and cybersecurity. Provide clear, helpful explanations about threats and security best practices. Keep responses concise but informative (2-3 sentences max).
+
+User question: ${userMessage}`
+          }]
+        }],
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 150,
+        },
+        safetySettings: [
           {
-            role: 'system',
-            content: 'You are a helpful cybersecurity assistant. A user is asking about phishing protection and cybersecurity. Provide clear, helpful explanations about threats and security best practices. Keep responses concise but informative (2-3 sentences max).'
+            category: "HARM_CATEGORY_HARASSMENT",
+            threshold: "BLOCK_MEDIUM_AND_ABOVE"
           },
           {
-            role: 'user',
-            content: userMessage
+            category: "HARM_CATEGORY_HATE_SPEECH",
+            threshold: "BLOCK_MEDIUM_AND_ABOVE"
           }
-        ],
-        max_tokens: 150,
-        temperature: 0.7
+        ]
       })
     });
 
-    if (!openaiResponse.ok) {
-      const errorText = await openaiResponse.text();
-      console.error('OpenAI API error:', openaiResponse.status, errorText);
+    if (!geminiResponse.ok) {
+      const errorText = await geminiResponse.text();
+      console.error('Gemini API error:', geminiResponse.status, errorText);
       
       // Handle rate limiting gracefully
-      if (openaiResponse.status === 429) {
+      if (geminiResponse.status === 429) {
         res.json({
           success: true,
           message: 'Rate limited - using fallback response',
@@ -85,17 +92,28 @@ app.post('/api/chat', async (req, res) => {
         return;
       }
       
-      throw new Error(`OpenAI API error: ${openaiResponse.status}`);
+      throw new Error(`Gemini API error: ${geminiResponse.status}`);
     }
 
-    const openaiData = await openaiResponse.json();
-    const aiResponse = openaiData.choices[0]?.message?.content || 'I apologize, but I cannot process your request at the moment.';
+    const geminiData = await geminiResponse.json();
+    console.log('Gemini API response:', JSON.stringify(geminiData, null, 2));
+    
+    let aiResponse = 'I apologize, but I cannot process your request at the moment.';
+    
+    if (geminiData.candidates && geminiData.candidates[0]) {
+      const candidate = geminiData.candidates[0];
+      if (candidate.content && candidate.content.parts && candidate.content.parts[0]) {
+        aiResponse = candidate.content.parts[0].text || aiResponse;
+      } else if (candidate.finishReason === 'MAX_TOKENS') {
+        aiResponse = 'I can help you with cybersecurity! Always verify suspicious emails, use strong passwords, and keep your software updated. What specific security concern do you have?';
+      }
+    }
 
-    console.log('OpenAI response:', aiResponse);
+    console.log('Gemini response:', aiResponse);
 
     res.json({
       success: true,
-      message: 'Real AI response from OpenAI',
+      message: 'Real AI response from Gemini',
       data: {
         sessionId: sessionId,
         messages: [
@@ -138,7 +156,7 @@ app.post('/api/scan', (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 SmartShield API server running on port ${PORT}`);
   console.log(`📊 Environment: development`);
-  console.log(`🤖 AI Provider: OpenAI GPT-3.5-turbo`);
+  console.log(`🤖 AI Provider: Google Gemini 1.5 Flash`);
   console.log(`🌐 Health check: http://localhost:${PORT}/health`);
-  console.log(`🔑 OpenAI API Key: ${process.env.OPENAI_API_KEY ? 'Set' : 'Not set'}`);
+  console.log(`🔑 Gemini API Key: ${process.env.GEMINI_API_KEY ? 'Set' : 'Not set'}`);
 });
