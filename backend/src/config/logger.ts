@@ -19,13 +19,16 @@ const logFormat = winston.format.combine(
   winston.format.errors({ stack: true }),
   winston.format.json(),
   winston.format.printf(({ timestamp, level, message, stack, ...meta }) => {
-    const logEntry = {
+    const logEntry: any = {
       timestamp,
       level,
       message,
-      ...(stack && { stack }),
       ...meta
     };
+    
+    if (stack) {
+      logEntry.stack = stack;
+    }
     
     // Remove sensitive data from logs
     const sanitized = sanitizeLogData(logEntry);

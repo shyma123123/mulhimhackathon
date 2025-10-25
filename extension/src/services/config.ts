@@ -1,51 +1,75 @@
-/**
- * Configuration Service for SmartShield Extension
- * Handles extension configuration and settings
- */
-
+// Configuration service for Chrome extension
 export interface ExtensionConfig {
-  enabled: boolean;
-  apiUrl: string;
-  detectionThreshold: number;
-  showNotifications: boolean;
+  apiEndpoint: string;
   autoScan: boolean;
+  notifications: boolean;
+  strictMode: boolean;
+  debugMode: boolean;
+  enabled: boolean;
+  dataRetentionDays: number;
 }
 
 export class ConfigService {
-  private static defaultConfig: ExtensionConfig = {
+  private static instance: ConfigService;
+  private config: ExtensionConfig = {
+    apiEndpoint: 'http://localhost:3001',
+    autoScan: true,
+    notifications: true,
+    strictMode: false,
+    debugMode: false,
     enabled: true,
-    apiUrl: 'http://localhost:4000',
-    detectionThreshold: 0.7,
-    showNotifications: true,
-    autoScan: true
+    dataRetentionDays: 30
   };
 
-  static async getConfig(): Promise<ExtensionConfig> {
+  static getInstance(): ConfigService {
+    if (!ConfigService.instance) {
+      ConfigService.instance = new ConfigService();
+    }
+    return ConfigService.instance;
+  }
+
+  async loadConfig(): Promise<ExtensionConfig> {
     try {
-      const result = await chrome.storage.local.get('config');
-      return { ...this.defaultConfig, ...result.config };
+      const result = await chrome.storage.sync.get(['settings']);
+      if (result.settings) {
+        this.config = { ...this.config, ...result.settings };
+      }
     } catch (error) {
-      console.error('Config get error:', error);
-      return this.defaultConfig;
+      console.error('Failed to load config:', error);
+    }
+    return this.config;
+  }
+
+  async saveConfig(config: Partial<ExtensionConfig>): Promise<void> {
+    try {
+      this.config = { ...this.config, ...config };
+      await chrome.storage.sync.set({ settings: this.config });
+    } catch (error) {
+      console.error('Failed to save config:', error);
     }
   }
 
-  static async setConfig(config: Partial<ExtensionConfig>): Promise<void> {
-    try {
-      const currentConfig = await this.getConfig();
-      const newConfig = { ...currentConfig, ...config };
-      await chrome.storage.local.set({ config: newConfig });
-    } catch (error) {
-      console.error('Config set error:', error);
-    }
+  getConfig(): ExtensionConfig {
+    return { ...this.config };
   }
 
-  static async resetConfig(): Promise<void> {
-    try {
-      await chrome.storage.local.set({ config: this.defaultConfig });
-    } catch (error) {
-      console.error('Config reset error:', error);
-    }
+  getApiEndpoint(): string {
+    return this.config.apiEndpoint;
+  }
+
+  isAutoScanEnabled(): boolean {
+    return this.config.autoScan;
+  }
+
+  areNotificationsEnabled(): boolean {
+    return this.config.notifications;
+  }
+
+  isStrictModeEnabled(): boolean {
+    return this.config.strictMode;
+  }
+
+  isDebugModeEnabled(): boolean {
+    return this.config.debugMode;
   }
 }
-

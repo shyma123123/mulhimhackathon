@@ -10,11 +10,11 @@
  * - Extension lifecycle events
  */
 
-import { StorageService } from '@/services/storage';
-import { AnalyticsService } from '@/services/analytics';
-import { PhishingDetector } from '@/services/phishingDetector';
-import { ConfigService } from '@/services/config';
-import { logger } from '@/utils/logger';
+import { StorageService } from '../services/storage';
+import { AnalyticsService } from '../services/analytics';
+import { PhishingDetector } from '../services/phishingDetector';
+import { ConfigService } from '../services/config';
+import { logger } from '../utils/logger';
 
 // Extension lifecycle
 chrome.runtime.onInstalled.addListener(async (details) => {
@@ -23,7 +23,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
   if (details.reason === 'install') {
     // First time installation
     await initializeExtension();
-    await AnalyticsService.trackEvent('extension_install', {
+    AnalyticsService.getInstance().track('extension_install', {
       version: chrome.runtime.getManifest().version
     });
     
@@ -33,9 +33,9 @@ chrome.runtime.onInstalled.addListener(async (details) => {
     });
   } else if (details.reason === 'update') {
     // Extension updated
-    await handleExtensionUpdate(details.previousVersion);
-    await AnalyticsService.trackEvent('extension_update', {
-      from_version: details.previousVersion,
+    await handleExtensionUpdate(details.previousVersion || 'unknown');
+    AnalyticsService.getInstance().track('extension_update', {
+      from_version: details.previousVersion || 'unknown',
       to_version: chrome.runtime.getManifest().version
     });
   }
@@ -43,7 +43,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 
 chrome.runtime.onStartup.addListener(async () => {
   logger.info('SmartShield extension startup');
-  await AnalyticsService.trackEvent('extension_startup');
+  AnalyticsService.getInstance().track('extension_startup');
 });
 
 // Tab management
@@ -86,7 +86,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
   
   switch (alarm.name) {
     case 'analytics_sync':
-      await AnalyticsService.syncPendingEvents();
+      // Analytics events are sent immediately, no sync needed
       break;
     case 'cleanup_old_data':
       await cleanupOldData();
@@ -108,10 +108,11 @@ chrome.runtime.onInstalled.addListener(() => {
 async function initializeExtension(): Promise<void> {
   try {
     // Set default configuration
-    await ConfigService.setDefaults();
+    const config = ConfigService.getInstance();
+  await config.loadConfig();
     
     // Initialize storage
-    await StorageService.initialize();
+    // Storage is initialized automatically
     
     // Set up alarms for periodic tasks
     setupAlarms();
@@ -149,7 +150,8 @@ async function initializeTabAnalysis(tabId: number, tab: chrome.tabs.Tab): Promi
     if (!tab.url || !tab.id) return;
     
     // Check if analysis is enabled
-    const config = await ConfigService.getConfig();
+    const configService = ConfigService.getInstance();
+    const config = configService.getConfig();
     if (!config.enabled) {
       return;
     }
@@ -231,17 +233,19 @@ async function handleMessage(
         break;
         
       case 'GET_CONFIG':
-        const config = await ConfigService.getConfig();
+        const configSvc = ConfigService.getInstance();
+        const config = configSvc.getConfig();
         sendResponse({ config });
         break;
         
       case 'UPDATE_CONFIG':
-        await ConfigService.updateConfig(message.payload);
+        const configSvc2 = ConfigService.getInstance();
+        await configSvc2.saveConfig(message.payload);
         sendResponse({ success: true });
         break;
         
       case 'ANALYTICS_EVENT':
-        await AnalyticsService.trackEvent(message.payload.event, message.payload.data);
+        AnalyticsService.getInstance().track(message.payload.event, message.payload.data);
         sendResponse({ success: true });
         break;
         
@@ -261,7 +265,7 @@ async function handleMessage(
     }
   } catch (error) {
     logger.error('Failed to handle message', { error });
-    sendResponse({ success: false, error: error.message });
+    sendResponse({ success: false, error: error instanceof Error ? error.message : 'Unknown error' });
   }
 }
 
@@ -288,11 +292,11 @@ async function handleAnalysisResult(payload: any, tab?: chrome.tabs.Tab): Promis
     await updateBadgeForTab(tab.id);
     
     // Track analytics
-    await AnalyticsService.trackEvent('scan', {
+    AnalyticsService.getInstance().track('scan', {
       score,
       label,
       url: tab.url,
-      domain: new URL(tab.url).hostname,
+      domain: tab.url ? new URL(tab.url).hostname : 'unknown',
       reasons_count: reasons.length
     });
     
@@ -328,10 +332,10 @@ async function handleShowWarning(payload: any, tab?: chrome.tabs.Tab): Promise<v
     });
     
     // Track warning shown
-    await AnalyticsService.trackEvent('warning_shown', {
+    AnalyticsService.getInstance().track('warning_shown', {
       score,
       url: tab.url,
-      domain: new URL(tab.url).hostname
+      domain: tab.url ? new URL(tab.url).hostname : 'unknown'
     });
     
   } catch (error) {
@@ -374,7 +378,7 @@ async function openChatbot(payload: any, tab?: chrome.tabs.Tab): Promise<void> {
     });
     
     // Track chatbot interaction
-    await AnalyticsService.trackEvent('chatbot_opened', {
+    AnalyticsService.getInstance().track('chatbot_opened', {
       score,
       url: tab.url,
       snapshot_hash: snapshotHash
@@ -390,17 +394,18 @@ async function openChatbot(payload: any, tab?: chrome.tabs.Tab): Promise<void> {
  */
 async function showWarningNotification(tab: chrome.tabs.Tab, score: number, reasons: string[]): Promise<void> {
   try {
-    const config = await ConfigService.getConfig();
+    const configService = ConfigService.getInstance();
+    const config = configService.getConfig();
     
     if (!config.notifications) {
       return;
     }
     
-    const notificationOptions = {
+    const notificationOptions: chrome.notifications.NotificationOptions<true> = {
       type: 'basic',
       iconUrl: chrome.runtime.getURL('images/icon-48.png'),
       title: 'SmartShield Warning',
-      message: `Potential phishing detected on ${new URL(tab.url).hostname}`,
+      message: `Potential phishing detected on ${tab.url ? new URL(tab.url).hostname : 'unknown site'}`,
       buttons: [
         { title: 'View Details' },
         { title: 'Dismiss' }
@@ -430,7 +435,8 @@ chrome.notifications.onClicked.addListener(async (notificationId) => {
       // Get tab status and show warning
       const status = await getTabStatus(tabId);
       if (status) {
-        await handleShowWarning(status, { id: tabId });
+        const tab = await chrome.tabs.get(tabId);
+        await handleShowWarning(status, tab);
       }
     }
   } catch (error) {
@@ -450,7 +456,8 @@ chrome.notifications.onButtonClicked.addListener(async (notificationId, buttonIn
         // View Details button
         const status = await getTabStatus(tabId);
         if (status) {
-          await handleShowWarning(status, { id: tabId });
+          const tab = await chrome.tabs.get(tabId);
+        await handleShowWarning(status, tab);
         }
       }
       // Dismiss button (buttonIndex === 1) - do nothing
@@ -484,7 +491,9 @@ function setupContextMenus(): void {
     
     switch (info.menuItemId) {
       case 'smartshield_scan':
-        await initializeTabAnalysis(tab.id, tab);
+        if (tab.id) {
+          await initializeTabAnalysis(tab.id, tab);
+        }
         break;
       case 'smartshield_report':
         await reportAsPhishing(tab);
@@ -500,9 +509,9 @@ async function reportAsPhishing(tab: chrome.tabs.Tab): Promise<void> {
   try {
     if (!tab.id || !tab.url) return;
     
-    await AnalyticsService.trackEvent('user_report', {
+    AnalyticsService.getInstance().track('user_report', {
       url: tab.url,
-      domain: new URL(tab.url).hostname,
+      domain: tab.url ? new URL(tab.url).hostname : 'unknown',
       user_action: 'manual_report'
     });
     
@@ -568,7 +577,8 @@ async function migrateSettings(previousVersion: string): Promise<void> {
  */
 async function cleanupOldData(): Promise<void> {
   try {
-    const config = await ConfigService.getConfig();
+    const configService = ConfigService.getInstance();
+    const config = configService.getConfig();
     const retentionDays = config.dataRetentionDays || 30;
     const cutoffTime = Date.now() - (retentionDays * 24 * 60 * 60 * 1000);
     
@@ -613,7 +623,8 @@ async function updatePhishingRules(): Promise<void> {
  */
 async function getExtensionStats(): Promise<any> {
   try {
-    const config = await ConfigService.getConfig();
+    const configService = ConfigService.getInstance();
+    const config = configService.getConfig();
     const allData = await StorageService.getAll();
     
     // Count active tabs

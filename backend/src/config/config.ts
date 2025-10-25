@@ -53,6 +53,10 @@ export interface Config {
   // Rate limiting
   rateLimitRequests: number;
   rateLimitWindow: number;
+  
+  // Prompt templates
+  analysisPromptTemplate: string;
+  chatPromptTemplate: string;
 }
 
 /**
@@ -139,6 +143,44 @@ export const config: Config = (() => {
       // Rate limiting
       rateLimitRequests: parseInt(process.env.RATE_LIMIT_REQUESTS || '100', 10),
       rateLimitWindow: parseInt(process.env.RATE_LIMIT_WINDOW || '900000', 10), // 15 minutes
+      
+      // Prompt templates
+      analysisPromptTemplate: process.env.ANALYSIS_PROMPT_TEMPLATE || `You are a cybersecurity expert specializing in phishing detection. Analyze the following content and determine if it's a phishing attempt.
+
+URL: {url}
+Content: {content}
+
+Please respond with a JSON object containing:
+{
+  "score": 0.0-1.0 (0 = definitely clean, 1 = definitely phishing),
+  "label": "suspicious" | "clean" | "uncertain",
+  "reasons": ["reason1", "reason2", ...],
+  "explanation": "Brief explanation of the analysis",
+  "confidence": 0.0-1.0
+}
+
+Look for common phishing indicators:
+- Urgent language demanding immediate action
+- Requests for sensitive information (passwords, SSN, credit cards)
+- Suspicious URLs or domains
+- Poor grammar/spelling
+- Threats or consequences for not acting
+- Impersonation of legitimate organizations
+- Unusual formatting or styling
+- Suspicious file attachments
+
+Respond with ONLY the JSON object, no additional text.`,
+      
+      chatPromptTemplate: process.env.CHAT_PROMPT_TEMPLATE || `You are a helpful cybersecurity assistant. A user has flagged the following content as potentially suspicious and is asking for an explanation:
+
+CONTEXT:
+{context}
+
+USER QUESTION: {question}
+
+Please provide a clear, helpful explanation. If the content appears to be phishing, explain why and what the user should do. If it appears legitimate, explain why and provide reassurance.
+
+Keep your response concise but informative (2-3 sentences max).`
     };
   } catch (error) {
     console.error('Configuration validation failed:', error);

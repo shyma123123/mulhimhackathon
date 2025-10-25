@@ -9,9 +9,9 @@
  * - Privacy-aware sanitization
  */
 
-import { ContentData } from '@/types/content';
-import { logger } from '@/utils/logger';
-import { sanitizeContent } from '@/utils/sanitization';
+import { ContentData } from '../types/content';
+import { logger } from '../utils/logger';
+import { sanitizeContent } from '../utils/sanitization';
 
 export interface FormData {
   action: string;
@@ -280,8 +280,8 @@ export class ContentExtractor {
         if (element.name && element.content) {
           headers.push(`${element.name}: ${element.content}`);
         }
-        if (element.property && element.content) {
-          headers.push(`${element.property}: ${element.content}`);
+        if (element.getAttribute('property') && element.content) {
+          headers.push(`${element.getAttribute('property')}: ${element.content}`);
         }
       });
 

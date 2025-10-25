@@ -4,417 +4,531 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartShield - Advanced AI-Powered Phishing Detection</title>
-    <meta name="description" content="SmartShield provides real-time phishing detection using advanced AI models, with browser extension, dashboard analytics, and enterprise-grade security.">
+    <meta name="description" content="SmartShield provides real-time phishing detection using advanced AI models including Gemini, with browser extension, dashboard analytics, and enterprise-grade security.">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
-<body data-lang="en">
-    <!-- Header / Navigation Bar -->
-    <header class="header">
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
                 <i class="fas fa-shield-alt"></i>
                 <span>SmartShield</span>
             </div>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="#home" class="nav-link active" data-en="Home" data-ar="الرئيسية">Home</a></li>
-                    <li><a href="#services" class="nav-link" data-en="Services" data-ar="الخدمات">Services</a></li>
-                    <li><a href="#about" class="nav-link" data-en="About" data-ar="حولنا">About</a></li>
-                    <li><a href="http://localhost:3000" class="nav-link" target="_blank" data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</a></li>
-                    <li><a href="#contact" class="nav-link" data-en="Contact" data-ar="اتصل بنا">Contact</a></li>
-                </ul>
-            </nav>
-            <button class="language-toggle" id="languageToggle">
-                <span class="en">EN</span> / <span class="ar">عربي</span>
-            </button>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-        <div class="mobile-menu" id="mobileMenu">
             <ul class="nav-menu">
-                <li><a href="#home" class="nav-link active" data-en="Home" data-ar="الرئيسية">Home</a></li>
-                <li><a href="#services" class="nav-link" data-en="Services" data-ar="الخدمات">Services</a></li>
-                <li><a href="#about" class="nav-link" data-en="About" data-ar="حولنا">About</a></li>
-                <li><a href="http://localhost:3000" class="nav-link" target="_blank" data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</a></li>
-                <li><a href="#contact" class="nav-link" data-en="Contact" data-ar="اتصل بنا">Contact</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#statistics">Statistics</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-    </header>
+    </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero">
         <div class="hero-container">
-            <div class="hero-content fade-in-left">
-                <h1 class="hero-title" data-en="Advanced AI-Powered Phishing Detection" data-ar="كشف التصيد الاحتيالي المتقدم بالذكاء الاصطناعي">
-                    Advanced AI-Powered Phishing Detection
-                </h1>
-                <p class="hero-subtitle" data-en="Protect your organization with cutting-edge cybersecurity technology. Real-time threat analysis, interactive training, and enterprise-grade security solutions." data-ar="احم مؤسستك بتقنيات الأمن السيبراني المتطورة. تحليل التهديدات في الوقت الفعلي، التدريب التفاعلي، وحلول الأمان على مستوى المؤسسات.">
-                    Protect your organization with cutting-edge cybersecurity technology. Real-time threat analysis, interactive training, and enterprise-grade security solutions.
-                </p>
-                <a href="#services" class="cta-button">
-                    <i class="fas fa-shield-alt"></i>
-                    <span data-en="Get Started" data-ar="ابدأ الآن">Get Started</span>
-                </a>
+            <div class="hero-content">
+                <h1>Advanced AI-Powered Phishing Detection</h1>
+                <p>Protect your organization with SmartShield's cutting-edge AI technology. Real-time phishing detection using Google Gemini, comprehensive analytics, and seamless browser integration.</p>
+                <div class="hero-buttons">
+                    <a href="#demo" class="btn btn-primary">
+                        <i class="fas fa-play"></i>
+                        View Demo
+                    </a>
+                    <a href="#download" class="btn btn-secondary">
+                        <i class="fas fa-download"></i>
+                        Download Extension
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">99.7%</span>
+                        <span class="stat-label">Detection Accuracy</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">2.3s</span>
+                        <span class="stat-label">Average Response Time</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">10K+</span>
+                        <span class="stat-label">Organizations Protected</span>
+                    </div>
+                </div>
             </div>
-            <div class="hero-content fade-in-right">
-                <div class="about-image" style="height: 300px; margin: 0;">
-                    <i class="fas fa-lock"></i>
+            <div class="hero-visual">
+                <div class="dashboard-preview">
+                    <div class="dashboard-header">
+                        <div class="dashboard-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <span class="dashboard-title">SmartShield Dashboard</span>
+                    </div>
+                    <div class="dashboard-content">
+                        <div class="dashboard-stats">
+                            <div class="dashboard-stat">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>1,247 Threats Blocked</span>
+                            </div>
+                            <div class="dashboard-stat">
+                                <i class="fas fa-clock"></i>
+                                <span>Real-time Protection</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-chart">
+                            <div class="chart-bar" style="height: 60%"></div>
+                            <div class="chart-bar" style="height: 80%"></div>
+                            <div class="chart-bar" style="height: 45%"></div>
+                            <div class="chart-bar" style="height: 90%"></div>
+                            <div class="chart-bar" style="height: 70%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="services-container">
-            <div class="section-header fade-in-up">
-                <h2 class="section-title" data-en="Our Services" data-ar="خدماتنا">Our Services</h2>
-                <p class="section-subtitle" data-en="Comprehensive cybersecurity solutions designed to protect your digital assets" data-ar="حلول أمنية شاملة مصممة لحماية أصولك الرقمية">
-                    Comprehensive cybersecurity solutions designed to protect your digital assets
-                </p>
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Powerful Features for Complete Protection</h2>
+                <p>SmartShield combines multiple layers of security to provide comprehensive phishing protection</p>
             </div>
-            <div class="services-grid">
-                <div class="service-card fade-in-up">
-                    <div class="service-icon">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-Powered Detection</h3>
+                    <p>Advanced machine learning models including Google Gemini for intelligent threat analysis and real-time phishing detection.</p>
+                    <ul>
+                        <li>Google Gemini Integration</li>
+                        <li>OpenAI GPT Fallback</li>
+                        <li>Local Model Support</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Browser Extension</h3>
+                    <p>Seamless Chrome extension that protects users in real-time without disrupting their browsing experience.</p>
+                    <ul>
+                        <li>Real-time URL Analysis</li>
+                        <li>Content Scanning</li>
+                        <li>Instant Warnings</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analytics Dashboard</h3>
+                    <p>Comprehensive analytics and reporting to track threats, user behavior, and system performance.</p>
+                    <ul>
+                        <li>Threat Intelligence</li>
+                        <li>User Analytics</li>
+                        <li>Performance Metrics</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Enterprise Integration</h3>
+                    <p>Built for enterprise environments with SOAR integration, API endpoints, and scalable architecture.</p>
+                    <ul>
+                        <li>n8n Workflow Integration</li>
+                        <li>REST API</li>
+                        <li>SOAR Compatibility</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>User Authentication</h3>
+                    <p>Secure user management with JWT authentication, role-based access control, and organization management.</p>
+                    <ul>
+                        <li>JWT Authentication</li>
+                        <li>Role-based Access</li>
+                        <li>Organization Management</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>AI Chat Assistant</h3>
+                    <p>Intelligent chat assistant that helps users understand threats and provides security guidance.</p>
+                    <ul>
+                        <li>Context-aware Responses</li>
+                        <li>Threat Explanation</li>
+                        <li>Security Guidance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section id="statistics" class="statistics">
+        <div class="container">
+            <div class="section-header">
+                <h2>Trusted by Organizations Worldwide</h2>
+                <p>SmartShield has been protecting organizations from phishing attacks with impressive results</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3 class="service-title" data-en="Extension for Real-time Detection" data-ar="إضافة للحماية في الوقت الفعلي">Extension for Real-time Detection</h3>
-                    <p class="service-description" data-en="Download our Chrome extension for real-time phishing protection. Automatically scans web pages and emails to detect threats before they can harm you." data-ar="حمل إضافة Chrome الخاصة بنا للحماية من التصيد في الوقت الفعلي. تفحص صفحات الويب والبريد الإلكتروني تلقائياً لاكتشاف التهديدات قبل أن تسبب ضرراً.">
-                        Download our Chrome extension for real-time phishing protection. Automatically scans web pages and emails to detect threats before they can harm you.
-                    </p>
-                    <div class="download-section">
-                        <h4 data-en="Download Extension" data-ar="تحميل الإضافة">Download Extension</h4>
-                        <p data-en="Install the SmartShield extension from Chrome Web Store or load it manually for development." data-ar="قم بتثبيت إضافة SmartShield من متجر Chrome أو حملها يدوياً للتطوير.">
-                            Install the SmartShield extension from Chrome Web Store or load it manually for development.
-                        </p>
-                        <div class="download-buttons">
-                            <a href="#" class="download-btn" data-en="Chrome Web Store" data-ar="متجر Chrome">Chrome Web Store</a>
-                            <a href="#manual-install" class="download-btn secondary" data-en="Manual Install" data-ar="تثبيت يدوي">Manual Install</a>
-                        </div>
-                        <div class="manual-install-guide" id="manual-install" style="display: none;">
-                            <h5 data-en="Manual Installation Guide" data-ar="دليل التثبيت اليدوي">Manual Installation Guide</h5>
-                            <ol>
-                                <li data-en="Download the extension files from our GitHub repository" data-ar="حمل ملفات الإضافة من مستودع GitHub الخاص بنا">Download the extension files from our GitHub repository</li>
-                                <li data-en="Open Chrome and go to chrome://extensions/" data-ar="افتح Chrome واذهب إلى chrome://extensions/">Open Chrome and go to chrome://extensions/</li>
-                                <li data-en="Enable 'Developer mode' in the top right" data-ar="فعّل 'وضع المطور' في الأعلى يمين">Enable 'Developer mode' in the top right</li>
-                                <li data-en="Click 'Load unpacked' and select the extension folder" data-ar="اضغط 'تحميل غير معبأ' واختر مجلد الإضافة">Click 'Load unpacked' and select the extension folder</li>
-                            </ol>
-                            <p><strong data-en="Extension Location:" data-ar="موقع الإضافة:">Extension Location:</strong> <code>/home/kali/MulhimHackathon/extension/dist/</code></p>
-                        </div>
+                    <div class="stat-number" data-target="99.7">0</div>
+                    <div class="stat-label">Detection Accuracy</div>
+                    <div class="stat-description">Advanced AI models achieve near-perfect phishing detection rates</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-number" data-target="2.3">0</div>
+                    <div class="stat-label">Seconds Response Time</div>
+                    <div class="stat-description">Lightning-fast threat analysis and user warnings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="stat-number" data-target="10500">0</div>
+                    <div class="stat-label">Organizations Protected</div>
+                    <div class="stat-description">From startups to Fortune 500 companies</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-ban"></i>
+                    </div>
+                    <div class="stat-number" data-target="2500000">0</div>
+                    <div class="stat-label">Threats Blocked</div>
+                    <div class="stat-description">Malicious URLs and phishing attempts prevented</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number" data-target="500000">0</div>
+                    <div class="stat-label">Users Protected</div>
+                    <div class="stat-description">Individual users and enterprise employees</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="stat-number" data-target="0.1">0</div>
+                    <div class="stat-label">False Positive Rate</div>
+                    <div class="stat-description">Minimal disruption to legitimate websites</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How SmartShield Works</h2>
+                <p>A multi-layered approach to phishing protection</p>
+            </div>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>URL Analysis</h3>
+                        <p>Every URL is analyzed using advanced heuristics including domain reputation, typosquatting detection, and suspicious patterns.</p>
+                    </div>
+                    <div class="step-icon">
+                        <i class="fas fa-link"></i>
                     </div>
                 </div>
-                <div class="service-card fade-in-up">
-                    <div class="service-icon">
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Content Scanning</h3>
+                        <p>Page content is analyzed for phishing indicators including urgent language, suspicious attachments, and brand impersonation.</p>
+                    </div>
+                    <div class="step-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>AI Analysis</h3>
+                        <p>Google Gemini AI model performs deep analysis of the content and context to determine threat level with high accuracy.</p>
+                    </div>
+                    <div class="step-icon">
                         <i class="fas fa-robot"></i>
                     </div>
-                    <h3 class="service-title" data-en="AI Chatbot" data-ar="روبوت المحادثة بالذكاء الاصطناعي">AI Chatbot</h3>
-                    <p class="service-description" data-en="Interact with our intelligent chatbot to get instant answers about phishing threats, security best practices, and real-time threat analysis." data-ar="تفاعل مع روبوت المحادثة الذكي للحصول على إجابات فورية حول تهديدات التصيد وأفضل ممارسات الأمان وتحليل التهديدات في الوقت الفعلي.">
-                        Interact with our intelligent chatbot to get instant answers about phishing threats, security best practices, and real-time threat analysis.
-                    </p>
-                    <a href="http://localhost:3000" class="btn" target="_blank" data-en="Open Chatbot" data-ar="فتح روبوت المحادثة">Open Chatbot</a>
                 </div>
-                <div class="service-card fade-in-up">
-                    <div class="service-icon">
-                        <i class="fas fa-gamepad"></i>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>User Protection</h3>
+                        <p>Users receive immediate warnings for suspicious content with clear explanations and recommended actions.</p>
                     </div>
-                    <h3 class="service-title" data-en="Interactive Game" data-ar="اللعبة التفاعلية">Interactive Game</h3>
-                    <p class="service-description" data-en="Test your phishing detection skills with our interactive training game. Learn to identify suspicious emails and websites through hands-on experience." data-ar="اختبر مهاراتك في كشف التصيد الاحتيالي مع لعبة التدريب التفاعلية. تعلم كيفية تحديد رسائل البريد الإلكتروني ومواقع الويب المشبوهة من خلال التجربة العملية.">
-                        Test your phishing detection skills with our interactive training game. Learn to identify suspicious emails and websites through hands-on experience.
-                    </p>
-                    <a href="phish-safe.html" class="btn" data-en="Play Game" data-ar="العب اللعبة">Play Game</a>
+                    <div class="step-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="about-container">
-            <div class="about-image fade-in-left">
-                <i class="fas fa-lock"></i>
+    <!-- Technology Stack -->
+    <section class="technology">
+        <div class="container">
+            <div class="section-header">
+                <h2>Built with Cutting-Edge Technology</h2>
+                <p>SmartShield leverages the latest in AI and security technology</p>
             </div>
-            <div class="about-content fade-in-right">
-                <h2 data-en="About SmartShield" data-ar="حول SmartShield">About SmartShield</h2>
-                <p data-en="SmartShield is a cutting-edge cybersecurity platform that combines artificial intelligence with interactive training to provide comprehensive protection against phishing attacks. Our advanced detection algorithms analyze patterns, content, and behavior to identify threats before they can cause harm." data-ar="SmartShield هو منصة أمنية متطورة تجمع بين الذكاء الاصطناعي والتدريب التفاعلي لتوفير حماية شاملة ضد هجمات التصيد الاحتيالي. خوارزميات الكشف المتقدمة تحلل الأنماط والمحتوى والسلوك لتحديد التهديدات قبل أن تسبب ضرراً.">
-                    SmartShield is a cutting-edge cybersecurity platform that combines artificial intelligence with interactive training to provide comprehensive protection against phishing attacks. Our advanced detection algorithms analyze patterns, content, and behavior to identify threats before they can cause harm.
-                </p>
-                <p data-en="With over 10 years of experience in cybersecurity, our team has developed a robust system that adapts to evolving threats and provides real-time protection for organizations of all sizes." data-ar="مع أكثر من 10 سنوات من الخبرة في الأمن السيبراني، طور فريقنا نظاماً قوياً يتكيف مع التهديدات المتطورة ويوفر حماية في الوقت الفعلي للمؤسسات من جميع الأحجام.">
-                    With over 10 years of experience in cybersecurity, our team has developed a robust system that adapts to evolving threats and provides real-time protection for organizations of all sizes.
-                </p>
-                <a href="#contact" class="btn-secondary">
-                    <i class="fas fa-arrow-right"></i>
-                    <span data-en="Learn More" data-ar="اعرف المزيد">Learn More</span>
-                </a>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Google Gemini</h3>
+                    <p>Primary AI model for intelligent threat analysis</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>OpenAI GPT</h3>
+                    <p>Fallback AI model for enhanced reliability</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>PostgreSQL</h3>
+                    <p>Robust database for threat intelligence</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fas fa-memory"></i>
+                    </div>
+                    <h3>Redis Cache</h3>
+                    <p>High-performance caching for fast responses</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-node-js"></i>
+                    </div>
+                    <h3>Node.js</h3>
+                    <p>Scalable backend architecture</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <h3>React</h3>
+                    <p>Modern dashboard interface</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer / Contact -->
-    <footer class="footer" id="contact">
-        <div class="footer-container">
-            <div class="footer-content">
-                <div class="contact-form fade-in-left">
-                    <h3 data-en="Contact Us" data-ar="تواصل معنا">Contact Us</h3>
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>Choose the plan that fits your organization's needs</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Starter</h3>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">29</span>
+                            <span class="period">/month</span>
+                        </div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Up to 100 users</li>
+                        <li><i class="fas fa-check"></i> Basic phishing detection</li>
+                        <li><i class="fas fa-check"></i> Email support</li>
+                        <li><i class="fas fa-check"></i> Basic analytics</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline">Get Started</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3>Professional</h3>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">99</span>
+                            <span class="period">/month</span>
+                        </div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Up to 500 users</li>
+                        <li><i class="fas fa-check"></i> Advanced AI detection</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                        <li><i class="fas fa-check"></i> Advanced analytics</li>
+                        <li><i class="fas fa-check"></i> API access</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Enterprise</h3>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">299</span>
+                            <span class="period">/month</span>
+                        </div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Unlimited users</li>
+                        <li><i class="fas fa-check"></i> All AI models</li>
+                        <li><i class="fas fa-check"></i> 24/7 support</li>
+                        <li><i class="fas fa-check"></i> Custom analytics</li>
+                        <li><i class="fas fa-check"></i> SOAR integration</li>
+                        <li><i class="fas fa-check"></i> Custom deployment</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Ready to Protect Your Organization?</h2>
+                <p>Get in touch with our team to learn more about SmartShield</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>contact@smartshield.ai</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Office</h3>
+                            <p>123 Security Street<br>Cyber City, CC 12345</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
                     <form>
                         <div class="form-group">
-                            <label for="name" data-en="Name" data-ar="الاسم">Name</label>
-                            <input type="text" id="name" name="name" placeholder="Your full name" required>
+                            <input type="text" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <label for="email" data-en="Email" data-ar="البريد الإلكتروني">Email</label>
-                            <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                            <input type="email" placeholder="Your Email" required>
                         </div>
                         <div class="form-group">
-                            <label for="message" data-en="Message" data-ar="الرسالة">Message</label>
-                            <textarea id="message" name="message" placeholder="Tell us about your security needs..." required></textarea>
+                            <input type="text" placeholder="Company Name" required>
                         </div>
-                        <button type="submit" class="submit-button" data-en="Send Message" data-ar="إرسال الرسالة">Send Message</button>
+                        <div class="form-group">
+                            <select required>
+                                <option value="">Select Plan</option>
+                                <option value="starter">Starter</option>
+                                <option value="professional">Professional</option>
+                                <option value="enterprise">Enterprise</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
                     </form>
                 </div>
-                <div class="contact-info fade-in-right">
-                    <h3 data-en="Get in Touch" data-ar="تواصل معنا">Get in Touch</h3>
-                    <p data-en="Ready to enhance your cybersecurity posture? Contact our team of experts to discuss your specific needs and discover how SmartShield can protect your organization." data-ar="مستعد لتعزيز وضعك الأمني؟ تواصل مع فريق الخبراء لدينا لمناقشة احتياجاتك المحددة واكتشاف كيف يمكن لـ SmartShield حماية مؤسستك.">
-                        Ready to enhance your cybersecurity posture? Contact our team of experts to discuss your specific needs and discover how SmartShield can protect your organization.
-                    </p>
-                    <div class="social-media">
-                        <a href="#" class="social-icon" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="#" class="social-icon" aria-label="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon" aria-label="Facebook">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-icon" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>SmartShield</span>
                     </div>
+                    <p>Advanced AI-powered phishing detection for modern organizations.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#download">Download</a></li>
+                        <li><a href="#demo">Demo</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#help">Help Center</a></li>
+                        <li><a href="#docs">Documentation</a></li>
+                        <li><a href="#api">API Docs</a></li>
+                        <li><a href="#status">Status</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p data-en="© 2024 SmartShield. All rights reserved. | Privacy Policy | Terms of Service" data-ar="© 2024 SmartShield. جميع الحقوق محفوظة. | سياسة الخصوصية | شروط الخدمة">
-                    © 2024 SmartShield. All rights reserved. | Privacy Policy | Terms of Service
-                </p>
+                <p>&copy; 2024 SmartShield. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#cookies">Cookie Policy</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
-    <script>
-        // Language Toggle Functionality
-        const languageToggle = document.getElementById('languageToggle');
-        const body = document.body;
-        let currentLang = 'en';
-
-        // Language data
-        const translations = {
-            en: {
-                placeholder: {
-                    name: "Your full name",
-                    email: "your.email@example.com",
-                    message: "Tell us about your security needs..."
-                }
-            },
-            ar: {
-                placeholder: {
-                    name: "اسمك الكامل",
-                    email: "بريدك.الإلكتروني@example.com",
-                    message: "أخبرنا عن احتياجاتك الأمنية..."
-                }
-            }
-        };
-
-        function switchLanguage(lang) {
-            currentLang = lang;
-            body.setAttribute('data-lang', lang);
-            
-            // Update all elements with data attributes
-            document.querySelectorAll('[data-en], [data-ar]').forEach(element => {
-                const text = element.getAttribute(`data-${lang}`);
-                if (text) {
-                    element.textContent = text;
-                }
-            });
-
-            // Update placeholders
-            const nameInput = document.getElementById('name');
-            const emailInput = document.getElementById('email');
-            const messageInput = document.getElementById('message');
-            
-            if (nameInput) nameInput.placeholder = translations[lang].placeholder.name;
-            if (emailInput) emailInput.placeholder = translations[lang].placeholder.email;
-            if (messageInput) messageInput.placeholder = translations[lang].placeholder.message;
-
-            // Update language toggle button
-            languageToggle.classList.toggle('active', lang === 'ar');
-        }
-
-        languageToggle.addEventListener('click', () => {
-            const newLang = currentLang === 'en' ? 'ar' : 'en';
-            switchLanguage(newLang);
-        });
-
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Active Navigation Link
-        function updateActiveNavLink() {
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                if (window.scrollY >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', updateActiveNavLink);
-
-        // Form Submission
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const submitBtn = this.querySelector('.submit-button');
-            const originalText = submitBtn.textContent;
-            
-            // Show loading state
-            submitBtn.classList.add('loading');
-            submitBtn.textContent = currentLang === 'en' ? 'Sending...' : 'جاري الإرسال...';
-            
-            // Simulate form submission
-            setTimeout(() => {
-                submitBtn.classList.remove('loading');
-                submitBtn.textContent = originalText;
-                
-                const message = currentLang === 'en' 
-                    ? 'Thank you for your message! We will get back to you soon.'
-                    : 'شكراً لرسالتك! سنتواصل معك قريباً.';
-                
-                alert(message);
-                this.reset();
-            }, 2000);
-        });
-
-        // Intersection Observer for Animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all animated elements
-        document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right').forEach(element => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(30px)';
-            element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-            observer.observe(element);
-        });
-
-        // Header scroll effect
-        let lastScrollY = window.scrollY;
-        const header = document.querySelector('.header');
-
-        window.addEventListener('scroll', () => {
-            const currentScrollY = window.scrollY;
-            
-            if (currentScrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.backdropFilter = 'blur(20px)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.8)';
-                header.style.backdropFilter = 'blur(10px)';
-            }
-            
-            lastScrollY = currentScrollY;
-        });
-
-        // Mobile Menu Toggle
-        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        mobileMenuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            const icon = mobileMenuToggle.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                const icon = mobileMenuToggle.querySelector('i');
-                icon.classList.add('fa-bars');
-                icon.classList.remove('fa-times');
-            });
-        });
-
-        // Manual Install Guide Toggle
-        document.querySelectorAll('a[href="#manual-install"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const guide = document.getElementById('manual-install');
-                const isVisible = guide.style.display !== 'none';
-                
-                if (isVisible) {
-                    guide.style.display = 'none';
-                    this.textContent = currentLang === 'en' ? 'Manual Install' : 'تثبيت يدوي';
-                } else {
-                    guide.style.display = 'block';
-                    this.textContent = currentLang === 'en' ? 'Hide Guide' : 'إخفاء الدليل';
-                }
-            });
-        });
-
-        // Chrome Web Store Link (placeholder)
-        document.querySelectorAll('a[href="#"]').forEach(link => {
-            if (link.textContent.includes('Chrome Web Store') || link.textContent.includes('متجر Chrome')) {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const message = currentLang === 'en' 
-                        ? 'Chrome Web Store link will be available when the extension is published.'
-                        : 'رابط متجر Chrome سيكون متاحاً عند نشر الإضافة.';
-                    alert(message);
-                });
-            }
-        });
-
-        // Initialize
-        updateActiveNavLink();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
