@@ -3,13 +3,13 @@
  * This is a simplified version for development/testing purposes
  */
 
-import express from 'express';
-import cors from 'cors';
-import helmet from 'helmet';
-import compression from 'compression';
-import morgan from 'morgan';
-import rateLimit from 'express-rate-limit';
-import dotenv from 'dotenv';
+import * as express from 'express';
+import * as cors from 'cors';
+import * as helmet from 'helmet';
+import * as compression from 'compression';
+import * as morgan from 'morgan';
+import * as rateLimit from 'express-rate-limit';
+import * as dotenv from 'dotenv';
 
 // Load environment variables
 dotenv.config();
@@ -118,24 +118,67 @@ app.get('/api/chat', (req, res) => {
   });
 });
 
-app.post('/api/chat', (req, res) => {
-  res.json({
-    success: true,
-    message: 'Mock chat endpoint - database not connected',
-    data: {
-      sessionId: req.body.sessionId || 'mock-session-' + Date.now(),
-      messages: [
-        {
-          role: 'user',
-          content: req.body.message || 'Hello'
-        },
-        {
-          role: 'assistant',
-          content: 'This is a mock response. The backend is running in development mode without database connections.'
-        }
-      ]
+app.post('/api/chat', async (req, res) => {
+  try {
+    const userMessage = req.body.message || req.body.question || 'Hello';
+    const sessionId = req.body.sessionId || 'session-' + Date.now();
+    
+    // Call OpenAI API
+    const openaiResponse = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: [
+          {
+            role: 'system',
+            content: 'You are a helpful cybersecurity assistant. A user is asking about phishing protection and cybersecurity. Provide clear, helpful explanations about threats and security best practices. Keep responses concise but informative (2-3 sentences max).'
+          },
+          {
+            role: 'user',
+            content: userMessage
+          }
+        ],
+        max_tokens: 150,
+        temperature: 0.7
+      })
+    });
+
+    if (!openaiResponse.ok) {
+      throw new Error(`OpenAI API error: ${openaiResponse.status}`);
     }
-  });
+
+    const openaiData = await openaiResponse.json();
+    const aiResponse = openaiData.choices[0]?.message?.content || 'I apologize, but I cannot process your request at the moment.';
+
+    res.json({
+      success: true,
+      message: 'Real AI response from OpenAI',
+      data: {
+        sessionId: sessionId,
+        messages: [
+          {
+            role: 'user',
+            content: userMessage
+          },
+          {
+            role: 'assistant',
+            content: aiResponse
+          }
+        ]
+      }
+    });
+  } catch (error) {
+    console.error('Chat API error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to get AI response',
+      message: error instanceof Error ? error.message : 'Unknown error'
+    });
+  }
 });
 
 app.get('/api/analytics', (req, res) => {
