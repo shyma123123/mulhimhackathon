@@ -113,7 +113,7 @@
                 <p data-en="SmartShield combines multiple layers of security to provide comprehensive phishing protection" data-ar="يجمع SmartShield طبقات متعددة من الأمان لتوفير حماية شاملة من التصيد الاحتيالي">SmartShield combines multiple layers of security to provide comprehensive phishing protection</p>
             </div>
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="feature-card clickable" onclick="openChromeStore()">
                     <div class="feature-icon">
                         <i class="fas fa-globe"></i>
                     </div>
@@ -124,8 +124,11 @@
                         <li data-en="Content Scanning" data-ar="فحص المحتوى">Content Scanning</li>
                         <li data-en="Instant Warnings" data-ar="تحذيرات فورية">Instant Warnings</li>
                     </ul>
+                    <div class="feature-action">
+                        <span data-en="Available Soon on Chrome Store" data-ar="متاح قريباً في متجر Chrome">Available Soon on Chrome Store</span>
+                    </div>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card clickable" onclick="openDashboard()">
                     <div class="feature-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
@@ -136,6 +139,24 @@
                         <li data-en="User Analytics" data-ar="تحليلات المستخدمين">User Analytics</li>
                         <li data-en="Performance Metrics" data-ar="مقاييس الأداء">Performance Metrics</li>
                     </ul>
+                    <div class="feature-action">
+                        <span data-en="Open Dashboard" data-ar="فتح لوحة التحكم">Open Dashboard</span>
+                    </div>
+                </div>
+                <div class="feature-card clickable" onclick="showChatbot()">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 data-en="AI Chatbot" data-ar="روبوت المحادثة الذكي">AI Chatbot</h3>
+                    <p data-en="Intelligent chatbot that helps users understand threats and provides security guidance in real-time." data-ar="روبوت محادثة ذكي يساعد المستخدمين على فهم التهديدات ويقدم إرشادات أمنية في الوقت الفعلي.">Intelligent chatbot that helps users understand threats and provides security guidance in real-time.</p>
+                    <ul>
+                        <li data-en="Real-time Assistance" data-ar="مساعدة في الوقت الفعلي">Real-time Assistance</li>
+                        <li data-en="Threat Explanation" data-ar="شرح التهديدات">Threat Explanation</li>
+                        <li data-en="Security Guidance" data-ar="إرشادات الأمان">Security Guidance</li>
+                    </ul>
+                    <div class="feature-action">
+                        <span data-en="Start Chat" data-ar="ابدأ المحادثة">Start Chat</span>
+                    </div>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -440,13 +461,36 @@
             <div class="footer-bottom">
                 <p data-en="&copy; 2024 SmartShield. All rights reserved." data-ar="&copy; 2024 SmartShield. جميع الحقوق محفوظة.">&copy; 2024 SmartShield. All rights reserved.</p>
                 <div class="footer-links">
-                    <a href="#privacy" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+                    <a href="privacy-policy.html" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
                     <a href="#terms" data-en="Terms of Service" data-ar="شروط الخدمة">Terms of Service</a>
                     <a href="#cookies" data-en="Cookie Policy" data-ar="سياسة ملفات تعريف الارتباط">Cookie Policy</a>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- Chatbot Widget -->
+    <div id="chatbot-widget" class="chatbot-widget" style="display: none;">
+        <div class="chatbot-header">
+            <h3 data-en="SmartShield Assistant" data-ar="مساعد الدرع الذكي">SmartShield Assistant</h3>
+            <button onclick="hideChatbot()" class="chatbot-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="chatbot-message bot">
+                <div class="message-content">
+                    <div class="message-text" data-en="Hello! I'm SmartShield Assistant. How can I help you with cybersecurity today?" data-ar="مرحباً! أنا مساعد الدرع الذكي. كيف يمكنني مساعدتك في الأمن السيبراني اليوم؟">Hello! I'm SmartShield Assistant. How can I help you with cybersecurity today?</div>
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input-field" placeholder="Type your message..." data-en-placeholder="Type your message..." data-ar-placeholder="اكتب رسالتك...">
+            <button onclick="sendChatbotMessage()" class="chatbot-send">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
     <script>
@@ -509,6 +553,90 @@
                 langToggle.addEventListener('click', function() {
                     const newLang = currentLanguage === 'en' ? 'ar' : 'en';
                     switchLanguage(newLang);
+                });
+            }
+        });
+
+        // Feature interaction functions
+        function openDashboard() {
+            window.open('http://localhost:3000', '_blank');
+        }
+
+        function openChromeStore() {
+            alert(currentLanguage === 'ar' ? 'متاح قريباً في متجر Chrome' : 'Available Soon on Chrome Store');
+        }
+
+        function showChatbot() {
+            const chatbot = document.getElementById('chatbot-widget');
+            chatbot.style.display = 'block';
+            chatbot.style.animation = 'slideInUp 0.3s ease-out';
+        }
+
+        function hideChatbot() {
+            const chatbot = document.getElementById('chatbot-widget');
+            chatbot.style.animation = 'slideOutDown 0.3s ease-out';
+            setTimeout(() => {
+                chatbot.style.display = 'none';
+            }, 300);
+        }
+
+        function sendChatbotMessage() {
+            const input = document.getElementById('chatbot-input-field');
+            const message = input.value.trim();
+            if (!message) return;
+
+            const messagesContainer = document.getElementById('chatbot-messages');
+            
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'chatbot-message user';
+            userMessage.innerHTML = `
+                <div class="message-content">
+                    <div class="message-text">${message}</div>
+                </div>
+            `;
+            messagesContainer.appendChild(userMessage);
+
+            // Clear input
+            input.value = '';
+
+            // Add bot response (simulated)
+            setTimeout(() => {
+                const botMessage = document.createElement('div');
+                botMessage.className = 'chatbot-message bot';
+                const responses = currentLanguage === 'ar' ? [
+                    'هذا سؤال ممتاز! يمكنني مساعدتك في فهم التهديدات السيبرانية.',
+                    'أنا هنا لمساعدتك في الأمن السيبراني. هل لديك أسئلة أخرى؟',
+                    'هذا موضوع مهم في الأمن السيبراني. دعني أشرح لك المزيد.',
+                    'شكراً لسؤالك! الأمن السيبراني مهم جداً في عصرنا الرقمي.'
+                ] : [
+                    'That\'s an excellent question! I can help you understand cybersecurity threats.',
+                    'I\'m here to help with cybersecurity. Do you have any other questions?',
+                    'This is an important cybersecurity topic. Let me explain more.',
+                    'Thank you for your question! Cybersecurity is very important in our digital age.'
+                ];
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                botMessage.innerHTML = `
+                    <div class="message-content">
+                        <div class="message-text">${randomResponse}</div>
+                    </div>
+                `;
+                messagesContainer.appendChild(botMessage);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 1000);
+
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Allow Enter key to send message
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatbotInput = document.getElementById('chatbot-input-field');
+            if (chatbotInput) {
+                chatbotInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        sendChatbotMessage();
+                    }
                 });
             }
         });
