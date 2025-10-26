@@ -19,6 +19,9 @@ dist/
 build/
 *.tsbuildinfo
 
+# Allow dashboard build for deployment
+!dashboard/dist/
+
 # IDE and editor files
 .vscode/
 .idea/
