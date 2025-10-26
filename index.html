@@ -565,10 +565,8 @@
                 // Local development - use localhost
                 window.open('http://localhost:3000', '_blank');
             } else {
-                // Deployed site - show message that dashboard is under deployment
-                alert(currentLanguage === 'ar' 
-                    ? 'لوحة التحكم قيد النشر قريباً. سيتم ربطها بعد اكتمال النشر.' 
-                    : 'Dashboard is being deployed. It will be linked after deployment is complete.');
+                // Deployed site - open dashboard
+                window.open('https://shyma123123.github.io/mulhimhackathon/dashboard/dist/', '_blank');
             }
         }
 
