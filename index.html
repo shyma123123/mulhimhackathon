@@ -24,7 +24,7 @@
                 <li><a href="#how-it-works" data-en="How It Works" data-ar="كيف يعمل">How It Works</a></li>
                 <li><a href="#pricing" data-en="Pricing" data-ar="الأسعار">Pricing</a></li>
                 <li><a href="#contact" data-en="Contact" data-ar="اتصل بنا">Contact</a></li>
-                <li><a href="http://localhost:3000" target="_blank" data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</a></li>
+                <li><a href="#" onclick="openDashboard(); return false;" data-en="Dashboard" data-ar="لوحة التحكم">Dashboard</a></li>
             </ul>
             <div class="language-toggle">
                 <button id="lang-toggle" class="lang-btn">
@@ -560,7 +560,16 @@
 
         // Feature interaction functions
         function openDashboard() {
-            window.open('http://localhost:3000', '_blank');
+            // Check if we're on localhost or deployed
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                // Local development - use localhost
+                window.open('http://localhost:3000', '_blank');
+            } else {
+                // Deployed site - show message that dashboard is under deployment
+                alert(currentLanguage === 'ar' 
+                    ? 'لوحة التحكم قيد النشر قريباً. سيتم ربطها بعد اكتمال النشر.' 
+                    : 'Dashboard is being deployed. It will be linked after deployment is complete.');
+            }
         }
 
         function openChromeStore() {
@@ -628,8 +637,12 @@
             `;
             messagesContainer.appendChild(loadingMessage);
 
-            // Call backend API
-            fetch('http://localhost:4000/api/chat', {
+            // Call backend API - handle both local and deployed environments
+            const apiUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
+                ? 'http://localhost:4000/api/chat'
+                : 'https://smartshield-backend.onrender.com/api/chat'; // Replace with your actual backend URL
+            
+            fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
